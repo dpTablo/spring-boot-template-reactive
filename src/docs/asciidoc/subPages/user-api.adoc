@@ -1,0 +1,24 @@
+= 사용자 API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+
+== GET
+
+=== 전체 유저 목록 조회
+
+==== HTTP request
+include::{snippets}/user-getAllUserList/http-request.adoc[]
+
+==== HTTP response
+include::{snippets}/user-getAllUserList/http-response.adoc[]
+
+==== Response Fields
+include::{snippets}/user-getAllUserList/response-fields.adoc[]
+
+==== Response Body
+include::{snippets}/user-getAllUserList/response-body.adoc[]

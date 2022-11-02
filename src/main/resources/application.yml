@@ -1,0 +1,21 @@
+spring:
+    config:
+        activate:
+            on-profile: prod
+    jackson:
+        default-property-inclusion: non_null
+    thymeleaf:
+        prefix: classpath:templates/
+        suffix: .html
+        cache: false
+        enabled: true
+server:
+    servlet:
+        context-path: /
+        session:
+            timeout: 600s
+    tomcat:
+        uri-encoding: UTF-8
+        threads:
+            min-spare: 20
+            max: 200

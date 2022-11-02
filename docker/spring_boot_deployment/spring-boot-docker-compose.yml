@@ -1,0 +1,11 @@
+version: "3.1"
+
+services:
+  spring-boot-template:
+    image: spring-boot-template:1.0.0
+    container_name: spring-boot-template
+    ports:
+      - 80:8088
+#    volumes:
+#      - /Users/tablo/Downloads/log:/var/log/spring-boot-template
+    restart: always

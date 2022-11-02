@@ -1,0 +1,5 @@
+jwt:
+    header: 'Authorization'
+    privateKey: 'dptablo_springboot_template'
+    expiryMinutes: 30
+    issuser: 'dptablo:springboot'

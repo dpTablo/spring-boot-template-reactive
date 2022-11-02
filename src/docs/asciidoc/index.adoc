@@ -1,0 +1,17 @@
+= Spring REST Docs
+dpTablo Spring REST Docs Sample
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+프로젝트의 API 문서 입니다.
+
+API 를 사용하기에 앞서 설명하고자 하는 내용을 이 페이지에 작성합니다.
+
+프로젝트에서 공통적으로 사용하는 http status 의 대한 의미, 인증 방식에 대한 설명과 같은 내용을 작성합니다.
+
+== API 목록
+link:subPages/user-api.html[사용자 API]
