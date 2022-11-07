@@ -2,7 +2,7 @@ package com.dptablo.template.springboot.service.defaults;
 
 import com.dptablo.template.springboot.model.dto.UserDto;
 import com.dptablo.template.springboot.model.entity.User;
-import com.dptablo.template.springboot.repository.UserRepository;
+import com.dptablo.template.springboot.repository.jpa.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

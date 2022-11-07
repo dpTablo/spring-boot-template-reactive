@@ -1,9 +1,10 @@
-package com.dptablo.template.springboot.repository;
+package com.dptablo.template.springboot.repository.jpa;
 
 import com.dptablo.template.springboot.model.entity.User;
 import com.dptablo.template.springboot.model.entity.UserRole;
 import com.dptablo.template.springboot.model.entity.UserRoleMapping;
 import com.dptablo.template.springboot.model.enumtype.Role;
+import com.dptablo.template.springboot.repository.jpa.UserRoleMappingRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

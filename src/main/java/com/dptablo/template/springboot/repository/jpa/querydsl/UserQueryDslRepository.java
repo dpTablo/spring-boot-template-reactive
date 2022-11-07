@@ -1,8 +1,8 @@
-package com.dptablo.template.springboot.repository.querydsl;
+package com.dptablo.template.springboot.repository.jpa.querydsl;
 
 import com.dptablo.template.springboot.model.entity.QUser;
 import com.dptablo.template.springboot.model.entity.User;
-import com.dptablo.template.springboot.repository.UserCustomRepository;
+import com.dptablo.template.springboot.repository.jpa.UserCustomRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

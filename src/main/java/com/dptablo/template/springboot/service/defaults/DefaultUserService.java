@@ -1,7 +1,7 @@
 package com.dptablo.template.springboot.service.defaults;
 
 import com.dptablo.template.springboot.model.dto.UserDto;
-import com.dptablo.template.springboot.repository.UserRepository;
+import com.dptablo.template.springboot.repository.jpa.UserRepository;
 import com.dptablo.template.springboot.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

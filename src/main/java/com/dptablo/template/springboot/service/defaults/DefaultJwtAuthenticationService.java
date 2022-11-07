@@ -4,7 +4,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.dptablo.template.springboot.exception.ApplicationException;
 import com.dptablo.template.springboot.exception.AuthenticateFailedException;
 import com.dptablo.template.springboot.model.entity.User;
-import com.dptablo.template.springboot.repository.UserRepository;
+import com.dptablo.template.springboot.repository.jpa.UserRepository;
 import com.dptablo.template.springboot.security.DefaultUserDetails;
 import com.dptablo.template.springboot.security.jwt.JwtTokenProcessor;
 import com.dptablo.template.springboot.service.JwtAuthenticationService;

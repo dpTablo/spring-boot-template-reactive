@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EntityScan(basePackages = {"com.dptablo.template.springboot.model.entity"})
-@EnableJpaRepositories(basePackages = {"com.dptablo.template.springboot.repository"})
+@EnableJpaRepositories(basePackages = {"com.dptablo.template.springboot.repository.jpa"})
 public class JpaConfiguration {
 }

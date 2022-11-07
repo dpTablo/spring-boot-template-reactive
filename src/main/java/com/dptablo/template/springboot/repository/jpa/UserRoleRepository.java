@@ -1,4 +1,4 @@
-package com.dptablo.template.springboot.repository;
+package com.dptablo.template.springboot.repository.jpa;
 
 import com.dptablo.template.springboot.model.entity.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,8 +1,8 @@
-package com.dptablo.template.springboot.repository.querydsl;
+package com.dptablo.template.springboot.repository.jpa.querydsl;
 
 import com.dptablo.template.springboot.configuration.TestQueryDslConfiguration;
 import com.dptablo.template.springboot.model.entity.User;
-import com.dptablo.template.springboot.repository.UserRepository;
+import com.dptablo.template.springboot.repository.jpa.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
