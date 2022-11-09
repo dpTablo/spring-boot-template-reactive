@@ -6,7 +6,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "user_role_mapping")
 @Table(name = "user_role_mapping")
 @NoArgsConstructor
 @AllArgsConstructor

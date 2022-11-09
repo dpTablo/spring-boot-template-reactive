@@ -24,6 +24,6 @@ public class UserR2DbcRepository implements UserCustomReactiveRepository {
 //                                .and("lastname").in("Doe", "White"))
 //                        .sort(by(desc("id"))))
 //                .all();
-        return template.select(User.class).all();
+        return template.select(User.class).from("t_user").all();
     }
 }

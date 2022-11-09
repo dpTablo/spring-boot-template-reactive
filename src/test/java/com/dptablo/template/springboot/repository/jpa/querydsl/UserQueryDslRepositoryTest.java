@@ -1,17 +1,20 @@
 package com.dptablo.template.springboot.repository.jpa.querydsl;
 
+import com.dptablo.template.springboot.configuration.JpaConfiguration;
 import com.dptablo.template.springboot.configuration.TestQueryDslConfiguration;
 import com.dptablo.template.springboot.model.entity.User;
 import com.dptablo.template.springboot.repository.jpa.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Repository;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.List;
 
@@ -20,6 +23,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest(includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Repository.class))
 @ActiveProfiles("test")
 @Import(TestQueryDslConfiguration.class)
+@ContextConfiguration(classes = {
+        JpaConfiguration.class, UserQueryDslRepository.class, UserRepository.class
+})
+@EnableAutoConfiguration
 class UserQueryDslRepositoryTest {
     @Autowired
     private UserQueryDslRepository userQueryDslRepository;

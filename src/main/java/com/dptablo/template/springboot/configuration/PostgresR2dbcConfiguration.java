@@ -14,7 +14,7 @@ import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
 @EnableR2dbcRepositories(
         basePackages = {"com.dptablo.template.springboot.repository.reactive"}
 )
-public class PostgresReactiveConfiguration extends AbstractR2dbcConfiguration {
+public class PostgresR2dbcConfiguration extends AbstractR2dbcConfiguration {
     @Value("${spring.r2dbc.url}")
     private String host;
 
@@ -29,7 +29,9 @@ public class PostgresReactiveConfiguration extends AbstractR2dbcConfiguration {
     public ConnectionFactory connectionFactory() {
         return new PostgresqlConnectionFactory(
                 PostgresqlConnectionConfiguration.builder()
-                        .host(host)
+                        .host("localhost")
+                        .port(5432)
+                        .database("test_database")
                         .username(userName)
                         .password(password)
                         .build());

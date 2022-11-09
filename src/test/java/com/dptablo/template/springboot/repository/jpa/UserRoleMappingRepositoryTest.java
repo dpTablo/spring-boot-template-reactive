@@ -1,5 +1,6 @@
 package com.dptablo.template.springboot.repository.jpa;
 
+import com.dptablo.template.springboot.configuration.JpaConfiguration;
 import com.dptablo.template.springboot.model.entity.User;
 import com.dptablo.template.springboot.model.entity.UserRole;
 import com.dptablo.template.springboot.model.entity.UserRoleMapping;
@@ -7,13 +8,19 @@ import com.dptablo.template.springboot.model.enumtype.Role;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 
 import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
 @ActiveProfiles("test")
+@ContextConfiguration(classes = {
+        JpaConfiguration.class,
+        UserRoleMappingRepository.class})
+@EnableAutoConfiguration
 class UserRoleMappingRepositoryTest {
     @Autowired
     private UserRoleMappingRepository userRoleMappingRepository;

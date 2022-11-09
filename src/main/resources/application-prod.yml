@@ -1,5 +1,18 @@
-server:
+spring:
     config:
         activate:
             on-profile: prod
+    r2dbc:
+        url: r2dbc:postgresql://localhost:5432/test_database
+        username: root
+        password: root1234
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/test_database
+        username: root
+        password: root1234
+    jpa:
+        hibernate:
+            ddl-auto: none
+server:
     port: 8080

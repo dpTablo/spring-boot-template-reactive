@@ -8,6 +8,6 @@ import reactor.core.publisher.Flux;
 
 @Repository
 public interface UserReactiveRepository extends ReactiveCrudRepository<User, String> {
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM t_user")
     Flux<User> getAllUsers();
 }

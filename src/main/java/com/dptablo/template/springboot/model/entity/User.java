@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "\"user\"")
+@Entity(name = "t_user")
+@Table(name = "t_user")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -22,6 +22,7 @@ import java.util.Set;
 @EqualsAndHashCode(exclude = "userRoleMappings")
 public class User implements Serializable {
     @Id
+    @org.springframework.data.annotation.Id
     @Column
     private String userId;
 

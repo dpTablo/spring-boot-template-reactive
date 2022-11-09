@@ -8,7 +8,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
+@Entity(name = "user_role")
 @Table(name = "user_role")
 @NoArgsConstructor
 @AllArgsConstructor
