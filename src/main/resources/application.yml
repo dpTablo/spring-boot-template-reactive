@@ -9,6 +9,13 @@ spring:
         suffix: .html
         cache: false
         enabled: true
+    flyway:
+        enable: true
+        locations: classpath:db/migration,classpath:db/migration/postgresql
+        baseline-on-migrate: true
+        baseline-version: 0
+        validate-on-migrate: true
+        sql-migration-suffixes: ddl
 server:
     servlet:
         context-path: /

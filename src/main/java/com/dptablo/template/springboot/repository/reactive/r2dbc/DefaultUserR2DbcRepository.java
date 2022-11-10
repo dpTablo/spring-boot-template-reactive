@@ -1,18 +1,18 @@
 package com.dptablo.template.springboot.repository.reactive.r2dbc;
 
-import com.dptablo.template.springboot.model.entity.User;
-import com.dptablo.template.springboot.repository.reactive.UserCustomReactiveRepository;
+import com.dptablo.template.springboot.model.r2dbc.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import static org.springframework.data.domain.Sort.by;
 
 @Repository
 @RequiredArgsConstructor
-public class UserR2DbcRepository implements UserCustomReactiveRepository {
+public class DefaultUserR2DbcRepository implements UserCustomR2dbcRepository {
     @Qualifier("r2dbcEntityTemplate")
     private final R2dbcEntityTemplate template;
 
@@ -25,5 +25,9 @@ public class UserR2DbcRepository implements UserCustomReactiveRepository {
 //                        .sort(by(desc("id"))))
 //                .all();
         return template.select(User.class).from("t_user").all();
+    }
+
+    public Mono<User> insert(User user) {
+        return template.insert(user);
     }
 }

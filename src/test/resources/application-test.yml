@@ -9,14 +9,15 @@ spring:
         console:
             enabled: true
     r2dbc:
-        url: r2dbc:postgresql://localhost:5432/test_database
-        username: root
-        password: root1234
+        url: r2dbc:h2:mem:///test_database?options=MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+        username: sa
+        password: sa
+        initialization-mode: always
     datasource:
-        driver-class-name: org.postgresql.Driver
-        url: jdbc:postgresql://localhost:5432/test_database
-        username: root
-        password: root1234
+        driver-class-name: org.h2.Driver
+        url: jdbc:h2:mem:test_database;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+        username: sa
+        password:
     jpa:
         defer-datasource-initialization: true
         database-platform: org.hibernate.dialect.H2Dialect
@@ -28,6 +29,16 @@ spring:
                 show_sql: true
                 format_sql: true
                 use_sql_comments: true
+    flyway:
+        enable: true
+        validate-on-migrate: true
+        locations: classpath:db/migration,classpath:db/migration/postgresql
+        url: jdbc:h2:mem:test_database;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+        user: sa
+        password: sa
+        baseline-on-migrate: true
+        baseline-version: 0
+        sql-migration-suffixes: ddl
 server:
     port: 9090
 logging:
@@ -35,4 +46,5 @@ logging:
         root: info
         org.hibernate.sql: debug
         org.hibernate.type.descriptor.sql: trace
-
+        io.r2dbc.postgresql.QUERY: debug
+        io.r2dbc.postgresql.PARAM: debug

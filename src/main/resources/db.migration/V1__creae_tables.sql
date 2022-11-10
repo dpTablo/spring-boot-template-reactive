@@ -1,7 +1,0 @@
-CREATE TABLE IF NOT EXISTS `t_user` (
-    userId VARCHAR(50) PRIMARY KEY,
-    password VARCHAR(50) NOT NULL,
-    name VARCHAR(100),
-    create_date DATETIME,
-    update_date DATETIME
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8;

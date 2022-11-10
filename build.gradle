@@ -49,7 +49,7 @@ dependencies {
     implementation "org.mariadb.jdbc:mariadb-java-client:3.0.7"
     implementation "org.postgresql:postgresql:42.5.0"
     implementation 'io.r2dbc:r2dbc-postgresql:0.8.13.RELEASE'
-    compile "org.flywaydb:flyway-core:9.7.0"
+    implementation "org.flywaydb:flyway-core:9.7.0"
 
     /* jwt */
     implementation "com.auth0:java-jwt:4.0.0"
@@ -69,6 +69,7 @@ dependencies {
 
     /* testing - database */
     testImplementation "com.h2database:h2:2.1.214"
+    testImplementation 'io.r2dbc:r2dbc-h2:1.0.0.RC1'
 
     /* testing - mocking api server */
     testImplementation "com.squareup.okhttp3:okhttp:4.10.0"

@@ -9,11 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableR2dbcRepositories(
         basePackages = {"com.dptablo.template.springboot.repository.reactive"}
 )
+@EnableTransactionManagement
 public class PostgresR2dbcConfiguration extends AbstractR2dbcConfiguration {
     @Value("${spring.r2dbc.url}")
     private String host;
