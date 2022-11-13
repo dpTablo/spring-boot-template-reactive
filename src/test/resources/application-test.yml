@@ -17,7 +17,7 @@ spring:
         driver-class-name: org.h2.Driver
         url: jdbc:h2:mem:test_database;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
         username: sa
-        password:
+        password: sa
     jpa:
         defer-datasource-initialization: true
         database-platform: org.hibernate.dialect.H2Dialect

@@ -3,6 +3,7 @@ package com.dptablo.template.springboot.controller.advice;
 import com.dptablo.template.springboot.exception.ApplicationException;
 import com.dptablo.template.springboot.model.ResponseDto;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,12 +15,14 @@ public class GlobalRestControllerAdvice {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> exceptionHandler(Exception e) {
         log.error(e.getMessage());
+        log.error(ExceptionUtils.getStackTrace(e));
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
     @ExceptionHandler(ApplicationException.class)
     public ResponseEntity<ResponseDto> applicationExceptionHandler(ApplicationException e) {
         log.error(e.getMessage());
+        log.error(ExceptionUtils.getStackTrace(e));
         var responseDto = ResponseDto.builder()
                 .code(e.getErrorCode().getErrorCode())
                 .message(e.getMessage())

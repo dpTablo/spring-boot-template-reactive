@@ -9,6 +9,9 @@ spring:
         url: r2dbc:postgresql://localhost:5432/test_database
         username: root
         password: root1234
+        pool:
+            initial-size: 100
+            validation-query: SELECT 1
     datasource:
         driver-class-name: org.postgresql.Driver
         url: jdbc:postgresql://localhost:5432/test_database

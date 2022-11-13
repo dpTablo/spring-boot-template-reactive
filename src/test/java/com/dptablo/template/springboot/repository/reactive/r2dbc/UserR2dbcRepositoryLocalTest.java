@@ -7,27 +7,33 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataR2dbcTest
-@ActiveProfiles("test")
+@ActiveProfiles("local")
 @ContextConfiguration(classes = {
         PostgresR2dbcConfiguration.class,
         FlywayConfiguration.class,
         UserR2dbcRepository.class})
 @EnableAutoConfiguration
-class UserR2dbcRepositoryTest {
+
+class UserR2dbcRepositoryLocalTest {
     @Autowired
     private UserR2dbcRepository userR2dbcRepository;
+
+    @Autowired
+    private DatabaseClient db;
     
     @Test
+    @Transactional
     void getAllUsers() {
         //given
         var now = LocalDateTime.now();
@@ -41,7 +47,7 @@ class UserR2dbcRepositoryTest {
                 .updateDate(now)
                 .build();
 
-        var result = userR2dbcRepository.save2(user).block();
+        var a = userR2dbcRepository.save2(user).block();
 
         //when
         List<User> users = userR2dbcRepository.getAllUsers()

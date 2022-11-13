@@ -27,7 +27,8 @@ public class SecurityConfiguration {
             "/api-docs/**",
             "/login",
             "/api/authenticate",
-            "/api/logout"
+            "/api/logout",
+            "/api/user"
         );
     }
 
