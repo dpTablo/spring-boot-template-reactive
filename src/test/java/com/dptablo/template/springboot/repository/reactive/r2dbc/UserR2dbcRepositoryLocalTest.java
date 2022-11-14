@@ -24,7 +24,6 @@ import static org.assertj.core.api.Assertions.assertThat;
         FlywayConfiguration.class,
         UserR2dbcRepository.class})
 @EnableAutoConfiguration
-
 class UserR2dbcRepositoryLocalTest {
     @Autowired
     private UserR2dbcRepository userR2dbcRepository;
@@ -33,7 +32,6 @@ class UserR2dbcRepositoryLocalTest {
     private DatabaseClient db;
     
     @Test
-    @Transactional
     void getAllUsers() {
         //given
         var now = LocalDateTime.now();

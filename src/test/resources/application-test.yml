@@ -46,5 +46,4 @@ logging:
         root: info
         org.hibernate.sql: debug
         org.hibernate.type.descriptor.sql: trace
-        io.r2dbc.postgresql.QUERY: debug
-        io.r2dbc.postgresql.PARAM: debug
+        io.r2dbc.h2: TRACE

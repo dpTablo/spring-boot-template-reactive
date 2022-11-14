@@ -35,7 +35,7 @@ class DefaultUserR2DbcRepositoryTest {
                 .createDate(now)
                 .updateDate(now)
                 .build();
-        var insertedUser1 = defaultUserR2DbcRepository.insert(user1).block();
+        var insertedUser1 = defaultUserR2DbcRepository.save(user1).block();
 
         var user2 = User.builder()
                 .userId("user2")
@@ -45,7 +45,7 @@ class DefaultUserR2DbcRepositoryTest {
                 .createDate(now)
                 .updateDate(now)
                 .build();
-        var insertedUser2 = defaultUserR2DbcRepository.insert(user2).block();
+        var insertedUser2 = defaultUserR2DbcRepository.save(user2).block();
 
         //when
         List<User> allUsers = defaultUserR2DbcRepository.getAllUsersByQuery()

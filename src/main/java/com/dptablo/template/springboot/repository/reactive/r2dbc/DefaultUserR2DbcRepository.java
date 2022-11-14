@@ -24,10 +24,10 @@ public class DefaultUserR2DbcRepository implements UserCustomR2dbcRepository {
 //                                .and("lastname").in("Doe", "White"))
 //                        .sort(by(desc("id"))))
 //                .all();
-        return template.select(User.class).from("t_user").all();
+        return template.select(User.class).all();
     }
 
-    public Mono<User> insert(User user) {
+    public Mono<User> save(User user) {
         return template.insert(user);
     }
 }
