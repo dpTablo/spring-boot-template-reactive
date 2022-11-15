@@ -16,7 +16,8 @@
         <appender-ref ref="CONSOLE" />
     </logger>
 
-    <logger name="org.testcontainers" level="warn">
+    <logger name="org.testcontainers" level="info">
         <appender-ref ref="CONSOLE" />
     </logger>
+    <logger name="com.github.dockerjava" level="info" />
 </configuration>

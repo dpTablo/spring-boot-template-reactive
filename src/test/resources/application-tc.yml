@@ -32,12 +32,4 @@ spring:
 server:
     port: 9090
 logging:
-#    level:
-#        root: trace
-#        org.hibernate.sql: debug
-#        org.hibernate.type.descriptor.sql: trace
-#        io.r2dbc.postgresql: debug
-#        org.testcontainers: info
-#        com.github.dockerjava: warn
-#        com.github.dockerjava.zerodep.shaded.org.apache.hc.client5.http: off
     config: classpath:logback/logback-tc.xml
