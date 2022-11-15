@@ -29,8 +29,8 @@ class UserR2dbcRepositoryLocalTest {
     private UserR2dbcRepository userR2dbcRepository;
 
     @Autowired
-    private DatabaseClient db;
-    
+    private DatabaseClient client;
+
     @Test
     void getAllUsers() {
         //given
@@ -39,13 +39,14 @@ class UserR2dbcRepositoryLocalTest {
         var user = User.builder()
                 .userId("user8585834")
                 .password("12345")
-                .name("사용자1")
+                .name("사용자8585834")
                 .phoneNumber("01099998888")
                 .createDate(now)
                 .updateDate(now)
                 .build();
 
-        var a = userR2dbcRepository.save2(user).block();
+//        userR2dbcRepository.save(user).block();
+        var a = userR2dbcRepository.save3(user).block();
 
         //when
         List<User> users = userR2dbcRepository.getAllUsers()

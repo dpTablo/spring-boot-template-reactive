@@ -72,8 +72,12 @@ dependencies {
     testImplementation "org.assertj:assertj-core:3.23.1"
 
     /* testing - database */
-    testImplementation "com.h2database:h2:2.1.214"
-    testImplementation 'io.r2dbc:r2dbc-h2:1.0.0.RC1'
+//    testImplementation "com.h2database:h2:2.1.214"
+//    testImplementation 'io.r2dbc:r2dbc-h2:1.0.0.RC1'
+    testImplementation "org.testcontainers:testcontainers:1.17.5"
+    testImplementation 'org.testcontainers:junit-jupiter:1.17.5'
+    testImplementation 'org.testcontainers:postgresql:1.17.5'
+    testImplementation 'org.testcontainers:r2dbc:1.17.5'
 
     /* testing - mocking api server */
     testImplementation "com.squareup.okhttp3:okhttp:4.10.0"

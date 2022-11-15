@@ -24,6 +24,9 @@ public interface UserR2dbcRepository extends R2dbcRepository<User, String> {
 //    Mono<User> update(String userId, String password);
 
     @Modifying
-    @Query("INSERT INTO t_user(user_id, password) VALUES (:#{#user.userId}, :#{#user.password})")
+    @Query("INSERT INTO t_user(user_id, password, name, phone_number) VALUES (:#{#user.userId}, :#{#user.password}, :#{#user.name}, :#{#user.phoneNumber})")
     Mono<Integer> save2(@Param("user") User user);
+
+    @Query("INSERT INTO t_user(user_id, password, name, phone_number) VALUES (:#{#user.userId}, :#{#user.password}, :#{#user.name}, :#{#user.phoneNumber})")
+    Mono<Integer> save3(@Param("user") User user);
 }
