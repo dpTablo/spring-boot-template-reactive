@@ -35,3 +35,9 @@ spring:
         validate-on-migrate: true
 server:
     port: 9090
+logging:
+    level:
+        root: info
+        org.hibernate.sql: debug
+        org.hibernate.type.descriptor.sql: trace
+        io.r2dbc.sql: TRACE

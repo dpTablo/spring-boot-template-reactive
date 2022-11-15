@@ -16,3 +16,5 @@ spring:
             ddl-auto: none
 server:
     port: 8080
+logging:
+    config: classpath:logback/logback-prod.xml
