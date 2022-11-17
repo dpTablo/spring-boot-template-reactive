@@ -1,8 +1,7 @@
 package com.dptablo.template.springboot.repository.reactive.r2dbc;
 
-import com.dptablo.template.springboot.R2dbcPostgreSQLTestSupportExtension;
+import com.dptablo.template.springboot.test.support.R2dbcPostgreSQLTestSupportExtension;
 import com.dptablo.template.springboot.configuration.FlywayConfiguration;
-import com.dptablo.template.springboot.configuration.PostgresR2dbcConfiguration;
 import com.dptablo.template.springboot.model.r2dbc.User;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -26,7 +25,6 @@ import static org.assertj.core.api.Assertions.*;
 @ExtendWith(R2dbcPostgreSQLTestSupportExtension.class)
 @TestMethodOrder(MethodOrderer.DisplayName.class)
 @ContextConfiguration(classes = {
-        PostgresR2dbcConfiguration.class,
         FlywayConfiguration.class,
         UserR2dbcRepository.class})
 @EnableAutoConfiguration
@@ -47,14 +45,14 @@ class UserR2dbcRepositoryTest {
                 .createDate(now)
                 .updateDate(now)
                 .build();
-
-        var result = userR2dbcRepository.save2(user).block();
+        userR2dbcRepository.insert(user).block();
 
         //when
         List<User> users = userR2dbcRepository.getAllUsers()
                 .collectList().block();
 
         //then
+        assertThat(users).isNotNull();
         assertThat(users.size()).isGreaterThanOrEqualTo(1);
     }
 }

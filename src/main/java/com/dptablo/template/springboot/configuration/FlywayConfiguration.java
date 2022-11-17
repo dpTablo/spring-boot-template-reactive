@@ -24,13 +24,13 @@ public class FlywayConfiguration {
     @Value("${spring.flyway.sql-migration-suffixes}")
     private String sqlMigrationSuffixes;
 
-    @Value("${spring.flyway.baseline-on-migrate}")
+    @Value("${spring.flyway.baseline-on-migrate:false}")
     private boolean baselineOnMigrate;
 
-    @Value("${spring.flyway.validate-on-migrate}")
+    @Value("${spring.flyway.validate-on-migrate:false}")
     private boolean validateMigrationNaming;
 
-    @Value("${spring.flyway.clean-disabled}")
+    @Value("${spring.flyway.clean-disabled:false}")
     private boolean cleanDisabled;
 
     @Value("${spring.flyway.locations}")

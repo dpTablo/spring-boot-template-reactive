@@ -1,6 +1,5 @@
-package com.dptablo.template.springboot;
+package com.dptablo.template.springboot.test.support;
 
-import com.dptablo.template.springboot.test.support.SpringApplicationConfiguration;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -22,7 +21,6 @@ public class R2dbcPostgreSQLTestSupportExtension implements
     public static final String POSTGRES_PASSWORD = "sa";
 
     private PostgreSQLContainer postgresContainer;
-    private String postgresContainerId = "";
     private Flyway flyway;
 
     private SpringApplicationConfiguration springApplicationConfiguration;
@@ -44,7 +42,7 @@ public class R2dbcPostgreSQLTestSupportExtension implements
     }
 
     @Override
-    public void beforeAll(ExtensionContext context) throws Exception {
+    public void beforeAll(ExtensionContext context) {
         postgresContainer = new PostgreSQLContainer<>(POSTGRES_IMAGES_TAG)
                 .withDatabaseName(POSTGRES_DATABASE_NAME)
                 .withUsername(POSTGRES_USERNAME)
@@ -71,7 +69,9 @@ public class R2dbcPostgreSQLTestSupportExtension implements
 
     @Override
     public void afterAll(ExtensionContext context) throws Exception {
-        postgresContainer.stop();
+        if(postgresContainer != null && postgresContainer.isRunning()) {
+            postgresContainer.stop();
+        }
     }
 
     @Override

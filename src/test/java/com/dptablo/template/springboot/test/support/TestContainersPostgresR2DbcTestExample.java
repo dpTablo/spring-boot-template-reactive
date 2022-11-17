@@ -1,9 +1,8 @@
-package com.dptablo.template.springboot;
+package com.dptablo.template.springboot.test.support;
 
 import com.dptablo.template.springboot.configuration.FlywayConfiguration;
 import com.dptablo.template.springboot.model.r2dbc.User;
 import com.dptablo.template.springboot.repository.reactive.r2dbc.DefaultUserR2DbcRepository;
-import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +24,7 @@ import static org.assertj.core.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.DisplayName.class)
 @ContextConfiguration(classes = {FlywayConfiguration.class, DefaultUserR2DbcRepository.class})
 @EnableAutoConfiguration
-public class TestContainersPostgresR2DbcTest2 {
-    @Autowired
-    static Flyway flyway;
-
+public class TestContainersPostgresR2DbcTestExample {
     @Autowired
     private DefaultUserR2DbcRepository defaultUserR2DbcRepository;
 
@@ -53,6 +49,7 @@ public class TestContainersPostgresR2DbcTest2 {
                 .block();
 
         //then
+        assertThat(allUsers).isNotNull();
         assertThat(allUsers.size()).isEqualTo(1);
         assertThat(allUsers.contains(insertedUser1)).isTrue();
     }
@@ -78,6 +75,7 @@ public class TestContainersPostgresR2DbcTest2 {
                 .block();
 
         //then
+        assertThat(allUsers).isNotNull();
         assertThat(allUsers.size()).isEqualTo(1);
         assertThat(allUsers.contains(insertedUser1)).isTrue();
     }
