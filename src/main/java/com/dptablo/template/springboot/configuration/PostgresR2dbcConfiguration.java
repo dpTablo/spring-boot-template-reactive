@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class PostgresR2dbcConfiguration extends AbstractR2dbcConfiguration {
     @Value("${spring.r2dbc.url}")
-    private String host;
+    private String url;
 
     @Value("${spring.r2dbc.username}")
     private String userName;
@@ -32,11 +32,18 @@ public class PostgresR2dbcConfiguration extends AbstractR2dbcConfiguration {
     @Override
     @Bean("postgresConnectionFactory")
     public ConnectionFactory connectionFactory() {
+        var url = this.url.replace("r2dbc:postgresql://", "");
+        var urls = url.split("/");
+        var domains = urls[0].split(":");
+        var host = domains[0];
+        var port = Integer.parseInt(domains[1]);
+        var databaseName = urls[1];
+
         return new PostgresqlConnectionFactory(
                 PostgresqlConnectionConfiguration.builder()
-                        .host("localhost")
-                        .port(5432)
-                        .database("test_database")
+                        .host(host)
+                        .port(port)
+                        .database(databaseName)
                         .username(userName)
                         .password(password)
                         .build());

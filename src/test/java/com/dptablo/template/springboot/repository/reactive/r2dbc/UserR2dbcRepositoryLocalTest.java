@@ -3,6 +3,8 @@ package com.dptablo.template.springboot.repository.reactive.r2dbc;
 import com.dptablo.template.springboot.configuration.FlywayConfiguration;
 import com.dptablo.template.springboot.configuration.PostgresR2dbcConfiguration;
 import com.dptablo.template.springboot.model.r2dbc.User;
+import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -29,7 +31,12 @@ class UserR2dbcRepositoryLocalTest {
     private UserR2dbcRepository userR2dbcRepository;
 
     @Autowired
-    private DatabaseClient client;
+    private Flyway flyway;
+
+    @BeforeEach
+    void beforeEach() {
+        flyway.undo();
+    }
 
     @Test
     void getAllUsers() {

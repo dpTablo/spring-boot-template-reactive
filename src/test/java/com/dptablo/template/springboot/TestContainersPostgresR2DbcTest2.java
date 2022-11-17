@@ -3,9 +3,8 @@ package com.dptablo.template.springboot;
 import com.dptablo.template.springboot.configuration.FlywayConfiguration;
 import com.dptablo.template.springboot.model.r2dbc.User;
 import com.dptablo.template.springboot.repository.reactive.r2dbc.DefaultUserR2DbcRepository;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -22,11 +21,14 @@ import static org.assertj.core.api.Assertions.*;
 @DataR2dbcTest
 @ActiveProfiles("tc")
 @Testcontainers
+@ExtendWith(R2dbcPostgreSQLTestSupportExtension.class)
+@TestMethodOrder(MethodOrderer.DisplayName.class)
 @ContextConfiguration(classes = {FlywayConfiguration.class, DefaultUserR2DbcRepository.class})
 @EnableAutoConfiguration
-@ExtendWith(R2DBCPostgresSQLExtension.class)
-@TestMethodOrder(MethodOrderer.DisplayName.class)
 public class TestContainersPostgresR2DbcTest2 {
+    @Autowired
+    static Flyway flyway;
+
     @Autowired
     private DefaultUserR2DbcRepository defaultUserR2DbcRepository;
 

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @Configuration
 public class FlywayConfiguration {
     @Value("${spring.flyway.url}")
@@ -28,6 +30,12 @@ public class FlywayConfiguration {
     @Value("${spring.flyway.validate-on-migrate}")
     private boolean validateMigrationNaming;
 
+    @Value("${spring.flyway.clean-disabled}")
+    private boolean cleanDisabled;
+
+    @Value("${spring.flyway.locations}")
+    private List<String> locations;
+
     @Bean(initMethod = "migrate")
     public Flyway flyway() {
         return new Flyway(Flyway.configure()
@@ -35,6 +43,8 @@ public class FlywayConfiguration {
                 .validateMigrationNaming(validateMigrationNaming)
                 .baselineVersion(baselineVersion)
                 .sqlMigrationSuffixes(sqlMigrationSuffixes)
+                .cleanDisabled(cleanDisabled)
+                .locations(locations.toArray(new String[0]))
                 .dataSource(url, user, password));
     }
 }

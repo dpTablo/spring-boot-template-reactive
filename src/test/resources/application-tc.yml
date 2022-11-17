@@ -29,6 +29,7 @@ spring:
         baseline-on-migrate: true
         baseline-version: 0
         sql-migration-suffixes: ddl
+        clean-disabled: false
 server:
     port: 9090
 logging:

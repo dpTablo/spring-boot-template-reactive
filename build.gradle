@@ -57,6 +57,7 @@ dependencies {
 
     /* utils */
     implementation 'org.apache.commons:commons-lang3'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
 
     /* dev */
     developmentOnly "org.springframework.boot:spring-boot-devtools"
@@ -66,6 +67,8 @@ dependencies {
     /* testing */
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation 'org.springframework.security:spring-security-test'
+    testCompileOnly "org.projectlombok:lombok"
+    testAnnotationProcessor "org.projectlombok:lombok"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.9.0"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.9.0"
