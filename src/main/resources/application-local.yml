@@ -5,6 +5,9 @@ spring:
     devtools:
         livereload:
             enabled: true
+    redis:
+        host: localhost
+        port: 6379
     r2dbc:
         url: r2dbc:postgresql://localhost:5432/test_database
         username: root

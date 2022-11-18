@@ -1,18 +1,18 @@
 buildscript {
     ext {
-        queryDslVersion = "5.0.0"
+        queryDslVersion = '5.0.0'
         snippetsDir = file('build/generated-snippets')
         restdocsVersion = '2.0.6.RELEASE'
     }
 }
 
 plugins {
-    id "java"
-    id "org.springframework.boot" version "2.7.5"
-    id "io.spring.dependency-management" version "1.0.12.RELEASE"
-    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
-    id "idea"
-    id "org.asciidoctor.jvm.convert" version "3.3.2"
+    id 'java'
+    id 'org.springframework.boot' version '2.7.5'
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
+    id 'idea'
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
 repositories {
@@ -20,8 +20,8 @@ repositories {
     jcenter()
 }
 
-group = "com.dptablo"
-version = "1.0.0"
+group = 'com.dptablo'
+version = '1.0.0'
 
 sourceCompatibility = 17
 targetCompatibility = 17
@@ -33,62 +33,66 @@ configurations {
 
 dependencies {
     /* spring */
-    implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "org.springframework.boot:spring-boot-starter-security"
-    implementation "org.springframework.boot:spring-boot-starter-webflux"
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
-    implementation "org.springframework.data:spring-data-r2dbc:1.5.5"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.data:spring-data-r2dbc:1.5.5'
 
+    /* redis */
+    implementation 'redis.clients:jedis:4.3.1'
+    
     /* queryDSL */
-    implementation "com.querydsl:querydsl-jpa:$queryDslVersion"
-    implementation "com.querydsl:querydsl-apt:$queryDslVersion"
-    annotationProcessor "com.querydsl:querydsl-apt:5.0.0"
+    implementation 'com.querydsl:querydsl-jpa:$queryDslVersion'
+    implementation 'com.querydsl:querydsl-apt:$queryDslVersion'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0'
 
     /* database */
-    implementation "org.mariadb.jdbc:mariadb-java-client:3.0.7"
-    implementation "org.postgresql:postgresql:42.5.0"
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.7'
+    implementation 'org.postgresql:postgresql:42.5.0'
     implementation 'org.postgresql:r2dbc-postgresql:1.0.0.RELEASE'
     implementation 'io.r2dbc:r2dbc-pool:1.0.0.RELEASE'
-    implementation "org.flywaydb:flyway-core:9.7.0"
+    implementation 'org.flywaydb:flyway-core:9.7.0'
 
     /* jwt */
-    implementation "com.auth0:java-jwt:4.0.0"
+    implementation 'com.auth0:java-jwt:4.0.0'
 
     /* utils */
     implementation 'org.apache.commons:commons-lang3'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
 
     /* dev */
-    developmentOnly "org.springframework.boot:spring-boot-devtools"
-    compileOnly "org.projectlombok:lombok"
-    annotationProcessor "org.projectlombok:lombok"
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 
     /* testing */
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    testCompileOnly "org.projectlombok:lombok"
-    testAnnotationProcessor "org.projectlombok:lombok"
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.9.0"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.9.0"
-    testImplementation "org.assertj:assertj-core:3.23.1"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
 
     /* testing - database */
-//    testImplementation "com.h2database:h2:2.1.214"
+//    testImplementation 'com.h2database:h2:2.1.214'
 //    testImplementation 'io.r2dbc:r2dbc-h2:1.0.0.RC1'
-    testImplementation "org.testcontainers:testcontainers:1.17.5"
+    testImplementation 'org.testcontainers:testcontainers:1.17.5'
     testImplementation 'org.testcontainers:junit-jupiter:1.17.5'
     testImplementation 'org.testcontainers:postgresql:1.17.5'
     testImplementation 'org.testcontainers:r2dbc:1.17.5'
 
     /* testing - mocking api server */
-    testImplementation "com.squareup.okhttp3:okhttp:4.10.0"
-    testImplementation "com.squareup.okhttp3:mockwebserver:4.10.0"
+    testImplementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.10.0'
 
     /* Spring RestDocs */
-    asciidoctorExtensions "org.springframework.restdocs:spring-restdocs-asciidoctor:$restdocsVersion"
-    testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc"
+    asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor:$restdocsVersion'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }
 
 java {
@@ -105,17 +109,17 @@ tasks {
 
     clean {
         doFirst {
-            delete "$projectDir/src/main/generated"
+            delete '$projectDir/src/main/generated'
         }
     }
 }
 
 /* queryDSL */
-def queryDslDir = "$buildDir/generated/querydsl"
+def queryDslDir = '$buildDir/generated/querydsl'
 
 querydsl {
     jpa = true
-    library = "com.querydsl:querydsl-apt:${queryDslVersion}"
+    library = 'com.querydsl:querydsl-apt:${queryDslVersion}'
     querydslSourcesDir = queryDslDir
 }
 
@@ -145,34 +149,34 @@ test {
 
 asciidoctor {
     doFirst {
-        delete file("src/main/resources/static/docs")
+        delete file('src/main/resources/static/docs')
     }
 
     dependsOn test
-    configurations "asciidoctorExtensions"
+    configurations 'asciidoctorExtensions'
     inputs.dir snippetsDir
-    outputDir "${asciidoctor.outputDir}/html5"
+    outputDir '${asciidoctor.outputDir}/html5'
 }
 
 bootJar {
     dependsOn asciidoctor
-    from ("${asciidoctor.outputDir}") {
-        into "static/docs"
+    from ('${asciidoctor.outputDir}') {
+        into 'static/docs'
     }
 }
 
 task copyDocumentToStatic(type: Copy) {
     dependsOn asciidoctor
 
-    from file("build/docs/asciidoc/html5")
-    into file("src/main/resources/static/docs")
+    from file('build/docs/asciidoc/html5')
+    into file('src/main/resources/static/docs')
 }
 
 task copyDocumentToJar(type: Copy) {
     dependsOn asciidoctor
 
-    from file("build/docs/asciidoc")
-    into file("BOOT-INF/classes/static/docs")
+    from file('build/docs/asciidoc')
+    into file('BOOT-INF/classes/static/docs')
 }
 
 build {
