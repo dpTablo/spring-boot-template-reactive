@@ -1,22 +1,22 @@
 package com.dptablo.template.springboot.configuration;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
-
 @Configuration
 @EntityScan(basePackages = {"com.dptablo.template.springboot.model.*"})
-@EnableJpaRepositories(basePackages = {"com.dptablo.template.springboot.repository.jpa"})
+@EnableJpaRepositories(
+        basePackages = {"com.dptablo.template.springboot.repository.jpa"},
+        entityManagerFactoryRef = "entityManagerFactory"
+)
 @EnableTransactionManagement
 public class JpaConfiguration {
     @Value("${spring.datasource.driver-class-name}")
@@ -42,9 +42,9 @@ public class JpaConfiguration {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(emf);
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
         return transactionManager;
     }
 }

@@ -9,8 +9,8 @@ import org.springframework.test.context.ActiveProfiles;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
-@ActiveProfiles("test")
-public class TestActiveProfileTest {
+@ActiveProfiles("tc")
+public class TcActiveProfileTest {
     @Autowired
     private ActiveProfile activeProfile;
 
@@ -25,7 +25,7 @@ public class TestActiveProfileTest {
     @Test
     void currentProfileTest() {
         // then
-        assertThat(activeProfile.getOnProfile()).isEqualTo("test");
+        assertThat(activeProfile.getOnProfile()).isEqualTo("tc");
     }
 
     @DisplayName("spring devtools 의 live reload가 활성화 되었는지 확인한다.")

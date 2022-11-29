@@ -20,13 +20,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 )
 @EnableTransactionManagement
 public class PostgresR2dbcConfiguration extends AbstractR2dbcConfiguration {
-    @Value("${spring.r2dbc.url}")
+    @Value("${spring.r2dbc.url:}")
     private String url;
 
-    @Value("${spring.r2dbc.username}")
+    @Value("${spring.r2dbc.username:}")
     private String userName;
 
-    @Value("${spring.r2dbc.password}")
+    @Value("${spring.r2dbc.password:}")
     private String password;
 
     @Override
@@ -36,7 +36,7 @@ public class PostgresR2dbcConfiguration extends AbstractR2dbcConfiguration {
         var urls = url.split("/");
         var domains = urls[0].split(":");
         var host = domains[0];
-        var port = Integer.parseInt(domains[1]);
+        var port = domains.length == 2 ? Integer.parseInt(domains[1]) : 5432;
         var databaseName = urls[1];
 
         return new PostgresqlConnectionFactory(

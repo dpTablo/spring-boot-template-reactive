@@ -1,5 +1,6 @@
-package com.dptablo.template.springboot.test.support;
+package com.dptablo.template.springboot.test.support.dto;
 
+import com.dptablo.template.springboot.test.support.dto.FlywayConfiguration;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -15,15 +15,16 @@ import java.nio.file.Paths;
 
 @EnableConfigurationProperties
 @TestPropertySource(locations = "classpath:application-tc.yml")
-public class R2dbcPostgreSQLTestSupportExtension implements
+public class DataSourcePostgresTestSupportExtension implements
         BeforeAllCallback, AfterAllCallback, BeforeEachCallback, AfterEachCallback {
 
     private PostgreSQLContainer postgresContainer;
+
     private Flyway flyway;
 
     private SpringApplicationConfiguration springApplicationConfiguration;
 
-    public R2dbcPostgreSQLTestSupportExtension() {
+    public DataSourcePostgresTestSupportExtension() {
         initSpringApplicationConfiguration();
     }
 
@@ -40,7 +41,19 @@ public class R2dbcPostgreSQLTestSupportExtension implements
     }
 
     @Override
-    public void beforeAll(ExtensionContext context) {
+    public void afterAll(ExtensionContext context) throws Exception {
+        if(postgresContainer != null && postgresContainer.isRunning()) {
+            postgresContainer.stop();
+        }
+    }
+
+    @Override
+    public void afterEach(ExtensionContext context) throws Exception {
+
+    }
+
+    @Override
+    public void beforeAll(ExtensionContext context) throws Exception {
         postgresContainer = new PostgreSQLContainer<>(TestContainersPostgresDatabaseSettings.POSTGRES_IMAGES_TAG)
                 .withDatabaseName(TestContainersPostgresDatabaseSettings.POSTGRES_DATABASE_NAME)
                 .withUsername(TestContainersPostgresDatabaseSettings.POSTGRES_USERNAME)
@@ -65,23 +78,6 @@ public class R2dbcPostgreSQLTestSupportExtension implements
                 .dataSource(postgresContainer.getJdbcUrl(), flywayConfig.getUser(), flywayConfig.getPassword()));
     }
 
-    @Override
-    public void afterAll(ExtensionContext context) throws Exception {
-        if(postgresContainer != null && postgresContainer.isRunning()) {
-            postgresContainer.stop();
-        }
-    }
-
-    @Override
-    public void beforeEach(ExtensionContext context) throws Exception {
-        flyway.clean();
-        flyway.migrate();
-    }
-
-    @Override
-    public void afterEach(ExtensionContext context) throws Exception {
-    }
-
     private void setupSpringApplicationConfiguration() {
         //configuration
         System.setProperty("spring.datasource.url", postgresContainer.getJdbcUrl());
@@ -95,5 +91,11 @@ public class R2dbcPostgreSQLTestSupportExtension implements
         System.setProperty("spring.r2dbc.password", postgresContainer.getPassword());
 
         System.setProperty("spring.flyway.url", postgresContainer.getJdbcUrl());
+    }
+
+    @Override
+    public void beforeEach(ExtensionContext context) throws Exception {
+        flyway.clean();
+        flyway.migrate();
     }
 }

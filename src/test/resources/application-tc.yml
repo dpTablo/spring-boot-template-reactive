@@ -5,21 +5,26 @@ spring:
     devtools:
         livereload:
             enabled: true
-    r2dbc:
-        url: r2dbc:tc:postgresql:///test_database?TC_IMAGE_TAG=14.5
-        username: sa
-        password: sa
-#    jpa:
-#        defer-datasource-initialization: true
-#        database-platform: org.hibernate.dialect.H2Dialect
-#        show-sql: true
-#        hibernate:
-#            ddl-auto: update
-#        properties:
-#            hibernate:
-#                show_sql: true
-#                format_sql: true
-#                use_sql_comments: true
+#    r2dbc:
+#        url: r2dbc:tc:postgresql:///test_database?TC_IMAGE_TAG=14.5
+#        username: sa
+#        password: sa
+#    datasource:
+#        driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+#        url: jdbc:postgresql://localhost:5432/test_database
+#        username:
+#        password:
+    jpa:
+        defer-datasource-initialization: false
+        database-platform: org.hibernate.dialect.H2Dialect
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                show_sql: true
+                format_sql: true
+                use_sql_comments: true
     flyway:
         enable: true
         validate-on-migrate: true

@@ -19,7 +19,7 @@ public class SecurityConfiguration {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().mvcMatchers(
+        return web -> web.ignoring().requestMatchers(
             "/",
             "/images/**",
             "/docs/**",
@@ -44,7 +44,7 @@ public class SecurityConfiguration {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
                 .authorizeHttpRequests()
-                    .mvcMatchers("/api/**")
+                    .requestMatchers("/api/**")
                         .hasRole("USER")
                     .anyRequest().authenticated();
 

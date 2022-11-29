@@ -1,4 +1,4 @@
-package com.dptablo.template.springboot.test.support;
+package com.dptablo.template.springboot.test.support.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
