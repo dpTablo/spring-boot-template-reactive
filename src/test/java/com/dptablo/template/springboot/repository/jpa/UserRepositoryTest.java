@@ -1,5 +1,6 @@
 package com.dptablo.template.springboot.repository.jpa;
 
+import com.dptablo.template.springboot.configuration.FlywayConfiguration;
 import com.dptablo.template.springboot.configuration.JpaConfiguration;
 import com.dptablo.template.springboot.model.entity.User;
 import com.dptablo.template.springboot.model.entity.UserRole;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,14 +25,18 @@ import java.util.HashSet;
 import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("tc")
 @Testcontainers
 @ExtendWith(DataSourcePostgresTestSupportExtension.class)
 @ContextConfiguration(classes = {
+        FlywayConfiguration.class,
         JpaConfiguration.class,
         UserRepository.class,
         UserRoleRepository.class,
-        User.class, UserRole.class})
+        User.class,
+        UserRole.class
+})
 @EnableAutoConfiguration
 class UserRepositoryTest {
     @Autowired

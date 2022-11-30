@@ -15,7 +15,7 @@ public class DefaultUserR2dbcService implements UserR2dbcService {
     private final UserCustomR2dbcRepository userCustomR2dbcRepository;
 
     @Override
-    @Transactional(transactionManager = "postgresTransactionManager")
+    @Transactional(transactionManager = "r2dbcPostgresTransactionManager")
     public Mono<User> addUser(User user) {
         return userCustomR2dbcRepository.save(user);
     }

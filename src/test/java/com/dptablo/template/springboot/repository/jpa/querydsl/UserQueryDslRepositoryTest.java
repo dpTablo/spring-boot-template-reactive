@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
@@ -24,6 +25,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Repository.class))
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("tc")
 @Testcontainers
 @ExtendWith(DataSourcePostgresTestSupportExtension.class)
@@ -46,24 +48,28 @@ class UserQueryDslRepositoryTest {
         User user1 = User.builder()
                 .userId("user1")
                 .name("홍길동")
+                .password("1234")
                 .build();
         userRepository.save(user1);
 
         User user2 = User.builder()
                 .userId("user2")
                 .name("스티브")
+                .password("1234")
                 .build();
         userRepository.save(user2);
 
         User user3 = User.builder()
                 .userId("user3")
                 .name("박길동")
+                .password("1234")
                 .build();
         userRepository.save(user3);
 
         User user4 = User.builder()
                 .userId("user4")
                 .name("문무길")
+                .password("1234")
                 .build();
         userRepository.save(user4);
 

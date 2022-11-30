@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(exclude = {"createDate", "updateDate"})
 public class User {
     @Id
-    @Column
     @JsonProperty("userId")
     private String userId;
 

@@ -9,7 +9,7 @@ spring:
         url: r2dbc:postgresql://localhost:5432/test_database
         username: root
         password: root1234
-    datasource:
+    datasource-postgres:
         driver-class-name: org.postgresql.Driver
         url: jdbc:postgresql://localhost:5432/test_database
         username: root
@@ -17,11 +17,17 @@ spring:
     jpa:
         hibernate:
             ddl-auto: none
+            implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+            physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
         properties:
             hibernate:
                 show_sql: true
                 format_sql: true
                 use_sql_comments: true
+                hbm2ddl:
+                    auto: validate
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+        database: postgresql
     flyway:
         url: jdbc:postgresql://localhost:5432/test_database
         user: root

@@ -80,15 +80,10 @@ public class DataSourcePostgresTestSupportExtension implements
 
     private void setupSpringApplicationConfiguration() {
         //configuration
-        System.setProperty("spring.datasource.url", postgresContainer.getJdbcUrl());
-        System.setProperty("spring.datasource.username", postgresContainer.getUsername());
-        System.setProperty("spring.datasource.password", postgresContainer.getPassword());
-
-        System.setProperty("spring.r2dbc.url", "r2dbc:postgresql://"
-                + postgresContainer.getHost() + ":" + postgresContainer.getFirstMappedPort()
-                + "/" + postgresContainer.getDatabaseName());
-        System.setProperty("spring.r2dbc.username", postgresContainer.getUsername());
-        System.setProperty("spring.r2dbc.password", postgresContainer.getPassword());
+        System.setProperty("spring.datasource-postgres.driver-class-name", "org.postgresql.Driver");
+        System.setProperty("spring.datasource-postgres.url", postgresContainer.getJdbcUrl());
+        System.setProperty("spring.datasource-postgres.username", postgresContainer.getUsername());
+        System.setProperty("spring.datasource-postgres.password", postgresContainer.getPassword());
 
         System.setProperty("spring.flyway.url", postgresContainer.getJdbcUrl());
     }

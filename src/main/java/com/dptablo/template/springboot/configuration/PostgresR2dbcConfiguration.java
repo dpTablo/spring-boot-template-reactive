@@ -30,7 +30,7 @@ public class PostgresR2dbcConfiguration extends AbstractR2dbcConfiguration {
     private String password;
 
     @Override
-    @Bean("postgresConnectionFactory")
+    @Bean("r2dbcPostgresConnectionFactory")
     public ConnectionFactory connectionFactory() {
         var url = this.url.replace("r2dbc:postgresql://", "");
         var urls = url.split("/");
@@ -54,9 +54,9 @@ public class PostgresR2dbcConfiguration extends AbstractR2dbcConfiguration {
         return new R2dbcEntityTemplate(connectionFactory());
     }
 
-    @Bean("postgresTransactionManager")
+    @Bean("r2dbcPostgresTransactionManager")
     public ReactiveTransactionManager postgresTransactionManager(
-            @Qualifier("postgresConnectionFactory") ConnectionFactory connectionFactory
+            @Qualifier("r2dbcPostgresConnectionFactory") ConnectionFactory connectionFactory
     ) {
         return new R2dbcTransactionManager(connectionFactory);
     }

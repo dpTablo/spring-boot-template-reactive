@@ -19,6 +19,7 @@ import jakarta.persistence.*;
 public class UserRoleMapping {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long userRoleMappingId;
 
     @ManyToOne
