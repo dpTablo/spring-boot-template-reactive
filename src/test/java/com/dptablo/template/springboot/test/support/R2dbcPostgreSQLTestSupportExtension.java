@@ -94,6 +94,7 @@ public class R2dbcPostgreSQLTestSupportExtension implements
         System.setProperty("spring.r2dbc.username", postgresContainer.getUsername());
         System.setProperty("spring.r2dbc.password", postgresContainer.getPassword());
 
+        System.setProperty("spring.flyway.enabled", "true");
         System.setProperty("spring.flyway.url", postgresContainer.getJdbcUrl());
     }
 }

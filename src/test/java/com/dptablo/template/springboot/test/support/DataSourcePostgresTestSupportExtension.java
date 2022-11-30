@@ -85,6 +85,7 @@ public class DataSourcePostgresTestSupportExtension implements
         System.setProperty("spring.datasource-postgres.username", postgresContainer.getUsername());
         System.setProperty("spring.datasource-postgres.password", postgresContainer.getPassword());
 
+        System.setProperty("spring.flyway.enabled", "true");
         System.setProperty("spring.flyway.url", postgresContainer.getJdbcUrl());
     }
 

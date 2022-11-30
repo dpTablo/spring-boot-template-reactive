@@ -39,6 +39,16 @@ spring:
         baseline-version: 0
         sql-migration-suffixes: ddl
         clean-disabled: false
+    kafka:
+        producer:
+            bootstrap-servers: localhost:9092
+        consumer:
+            bootstrap-servers: localhost:9092
+            auto-offset-reset: earliest
+            group-id: tablo-kafka-group
+            enable-auto-commit: false
+        listener:
+            ack-mode: manual
 server:
     port: 9090
 logging:

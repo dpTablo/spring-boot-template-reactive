@@ -1,6 +1,7 @@
 buildscript {
     ext {
         queryDslVersion = "5.0.0"
+        testcontainersVersion = "1.17.6"
         snippetsDir = file('build/generated-snippets')
         restdocsVersion = '2.0.6.RELEASE'
     }
@@ -39,6 +40,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
     implementation "org.springframework.data:spring-data-r2dbc"
+    implementation 'org.springframework.kafka:spring-kafka'
 
     /* queryDSL */
     implementation "com.querydsl:querydsl-jpa:$queryDslVersion:jakarta"
@@ -76,16 +78,21 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.9.1"
     testImplementation "org.assertj:assertj-core:3.23.1"
 
+    testImplementation "org.testcontainers:junit-jupiter:$testcontainersVersion"
+
     /* testing - database */
     testImplementation "com.h2database:h2:2.1.214"
-    testImplementation "org.testcontainers:testcontainers:1.17.6"
-    testImplementation 'org.testcontainers:junit-jupiter:1.17.6'
-    testImplementation 'org.testcontainers:postgresql:1.17.6'
-    testImplementation 'org.testcontainers:r2dbc:1.17.6'
+    testImplementation "org.testcontainers:testcontainers:$testcontainersVersion"
+    testImplementation "org.testcontainers:postgresql:$testcontainersVersion"
+    testImplementation "org.testcontainers:r2dbc:$testcontainersVersion"
 
     /* testing - mocking api server */
     testImplementation "com.squareup.okhttp3:okhttp:4.10.0"
     testImplementation "com.squareup.okhttp3:mockwebserver:4.10.0"
+
+    /* testing - spring kafka */
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
+    testImplementation "org.testcontainers:kafka:$testcontainersVersion"
 
     /* Spring RestDocs */
     asciidoctorExtensions "org.springframework.restdocs:spring-restdocs-asciidoctor:$restdocsVersion"
