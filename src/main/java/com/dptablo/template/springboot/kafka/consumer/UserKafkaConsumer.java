@@ -16,7 +16,7 @@ public class UserKafkaConsumer {
     private CountDownLatch latch = new CountDownLatch(1);
     private String payload;
 
-    @KafkaListener(topics = "${test.topic}")
+    @KafkaListener(topics = "userTopic")
     public void receive(ConsumerRecord<?, ?> consumerRecord) {
         payload = consumerRecord.toString();
         latch.countDown();

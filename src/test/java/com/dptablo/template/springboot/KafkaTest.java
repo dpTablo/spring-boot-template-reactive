@@ -12,5 +12,5 @@ public class KafkaTest {
     @Test
     @DisplayName("kafka 테스트 작성중")
     void test1() {
-
+    }
 }

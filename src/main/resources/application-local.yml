@@ -53,6 +53,14 @@ spring:
         listener:
             ack-mode: manual
         bootstrap-servers: localhost:9092
+    data:
+        mongodb:
+            database: test_database
+            host: localhost
+            username: root
+            password: root1234
+            port: 27017
+            authentication-database: admin
 server:
     port: 9090
 logging:
