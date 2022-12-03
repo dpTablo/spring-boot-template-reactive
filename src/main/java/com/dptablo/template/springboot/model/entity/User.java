@@ -41,6 +41,7 @@ public class User implements Serializable {
     @Column
     private LocalDateTime updateDate;
 
+    @Builder.Default
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<UserRoleMapping> userRoleMappings = new HashSet<>();
 

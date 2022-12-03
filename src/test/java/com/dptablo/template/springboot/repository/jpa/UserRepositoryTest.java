@@ -66,7 +66,7 @@ class UserRepositoryTest {
                 .orElseThrow(NullPointerException::new);
 
         //then
-        assertThat(foundUser).isEqualTo(null);
+        assertThat(foundUser).isEqualTo(user);
     }
 
     @DisplayName("userRoles 조회 테스트")

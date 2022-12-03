@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableR2dbcRepositories(
-        basePackages = {"com.dptablo.template.springboot.repository.reactive"}
+        basePackages = {"com.dptablo.template.springboot.repository.reactive.r2dbc"}
 )
 @EnableTransactionManagement
 public class PostgresR2dbcConfiguration extends AbstractR2dbcConfiguration {
