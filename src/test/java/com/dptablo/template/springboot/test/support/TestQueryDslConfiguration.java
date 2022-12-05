@@ -1,4 +1,4 @@
-package com.dptablo.template.springboot.configuration;
+package com.dptablo.template.springboot.test.support;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

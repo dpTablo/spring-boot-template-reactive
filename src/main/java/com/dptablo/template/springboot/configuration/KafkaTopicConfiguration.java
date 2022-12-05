@@ -6,6 +6,7 @@ import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.KafkaAdmin;
 
 import java.util.HashMap;
@@ -25,6 +26,6 @@ public class KafkaTopicConfiguration {
 
     @Bean
     public NewTopic userTopic() {
-         return new NewTopic("userTopic", 1, (short) 1);
+        return TopicBuilder.name("userTopic").build();
     }
 }

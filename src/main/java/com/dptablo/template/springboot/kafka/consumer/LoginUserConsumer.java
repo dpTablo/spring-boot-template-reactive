@@ -1,31 +1,33 @@
 package com.dptablo.template.springboot.kafka.consumer;
 
+import com.dptablo.template.springboot.model.kafka.LoginUserMessage;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CountDownLatch;
 
-@Component
+@Service
 @Slf4j
 @RequiredArgsConstructor
 public class LoginUserConsumer {
-    @Getter
-    private CountDownLatch latch = new CountDownLatch(1);
+    private final int COUNT_DOWN = 1;
 
     @Getter
-    private ConsumerRecord payload;
+    private CountDownLatch latch = new CountDownLatch(COUNT_DOWN);
+
+    @Getter
+    private LoginUserMessage message;
 
     @KafkaListener(topics = "userTopic", groupId = "tablo-kafka-group")
-    public void receive(ConsumerRecord<?, ?> consumerRecord) {
-        payload = consumerRecord;
+    public void receive(LoginUserMessage message) {
+        this.message = message;
         latch.countDown();
     }
 
     public void resetLatch() {
-        latch = new CountDownLatch(1);
+        latch = new CountDownLatch(COUNT_DOWN);
     }
 }

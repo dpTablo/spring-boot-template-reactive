@@ -51,7 +51,7 @@ spring:
             group-id: tablo-kafka-group
             enable-auto-commit: true
         listener:
-            ack-mode: manual
+            ack-mode: record
         bootstrap-servers: localhost:9092
     data:
         mongodb:

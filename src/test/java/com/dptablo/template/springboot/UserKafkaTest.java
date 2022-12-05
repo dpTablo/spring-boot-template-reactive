@@ -44,9 +44,8 @@ public class UserKafkaTest {
         //then
         assertThat(messageConsumed).isTrue();
 
-        var consumerRecord = loginUserConsumer.getPayload();
-        var value = consumerRecord.value();
-//        assertThat(loginUserConsumer.getPayload()).contains(message);
-        System.out.println("123");
+        var receivedMessage = loginUserConsumer.getMessage();
+        assertThat(receivedMessage).isNotNull();
+        assertThat(receivedMessage).isEqualTo(message);
     }
 }

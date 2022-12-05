@@ -1,7 +1,7 @@
 package com.dptablo.template.springboot.repository.jpa.querydsl;
 
 import com.dptablo.template.springboot.configuration.JpaConfiguration;
-import com.dptablo.template.springboot.configuration.TestQueryDslConfiguration;
+import com.dptablo.template.springboot.test.support.TestQueryDslConfiguration;
 import com.dptablo.template.springboot.model.entity.User;
 import com.dptablo.template.springboot.repository.jpa.UserRepository;
 import com.dptablo.template.springboot.test.support.DataSourcePostgresTestSupportExtension;
