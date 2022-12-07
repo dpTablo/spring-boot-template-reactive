@@ -4,7 +4,6 @@ import com.dptablo.template.springboot.configuration.ReactiveMongoDBConfiguratio
 import com.dptablo.template.springboot.model.mongo.User;
 import com.dptablo.template.springboot.test.support.MongoDBTestSupportExtension;
 import com.dptablo.template.springboot.test.support.TestContainersReactiveMongoDBTest;
-import com.mongodb.reactivestreams.client.MongoClient;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -23,7 +23,6 @@ import static org.assertj.core.api.Assertions.*;
 @ActiveProfiles("tc")
 @Testcontainers
 @ExtendWith(R2dbcPostgreSQLTestSupportExtension.class)
-@TestMethodOrder(MethodOrderer.DisplayName.class)
 @ContextConfiguration(classes = {
         FlywayConfiguration.class,
         UserR2dbcRepository.class})

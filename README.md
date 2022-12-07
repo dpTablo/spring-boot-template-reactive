@@ -74,10 +74,6 @@ Spring Reactive Stack 의 MongoDB 를 이용한 repository 구현방식을 사�
 - org.assertj
 - com.squareup.okhttp3:mockwebserver
 
-테스트의 멱등성과 실제 사용 DBMS 에 대한 테스트 신뢰성을 위하여 Testcontainers ([https://www.testcontainers.org/](https://www.testcontainers.org/)) 를 적용하였습니다. Testcontainers 를 이용한 테스트 케이스에서는 데이터의 롤백이나 사전 준비작업 등에 대한 처리를 하지 않아도 됩니다.
-
-Testcontainers 를 이용한 테스트 케이스 작성을 강제하지 않습니다. 하지만 반복적인 로컬 테스트 수행을 할 수 있도록 구현해야 합니다. 테스트를 위한 별도의 서비스가 준비되어야 한다면 install 가이드와 준비과정에 대한 문서를 제공해야 합니다.
-
 # 프로젝트 표준 구성 사용 시 알아두어야 할 사항
 
 이 spring boot 프로젝트 표준에서는 사용하고자 하는 모든 기술 스택에 대한 프레임워크 의존성과 설정, 예제코드 등이 작성되어 있습니다. 그리고 적용된 기술 스택에 대하여 함께 사용 가능한 것을 전제로 구성되어 있습니다. 예를 들어 JPA-Datasource와 MongoDB-Reactive 를 사용하여 모두 사용하는 것을 의미합니다.
@@ -123,3 +119,25 @@ Testcontainers 를 이용한 테스트 케이스 작성을 강제하지 않습�
 test profile 을 이용하여 in-memory DB에 대한 테스트를 합니다. 하지만 in-memory DB 의 h2, embeded DB 의 경우에는 특정 벤더의 DBMS에 대한 테스트 신뢰성을 보장하지 못합니다.
 
 tc profile 에 testcontainers 를 사용에 필요한 사항을 설정하고 이를 사용하여 테스트 케이스 수행시 사용할 수 있습니다.
+
+# 테스트 코드 작성에 대하여
+
+### 기본적인 테스트 작성 원칙
+
+- Controller, Service, Repository, Component 등 각각의 요소들은 각자의 테스트만 수행하고 주입되는 의존 클래스에 대한 것은 mock 객체를 사용하여 작성합니다.
+- Controller 테스트는 클라이언트로부터 전달되는 request 의 처리와 response 에 대한 검증 테스트를 작성합니다.
+- Service, component 테스트는 처리 프로세스 로직에 대한 테스트를 작성합니다.
+- Repository 테스트는 DB에 대한 CRUD 가 올바르게 처리 되는가에 대한 테스트를 작성합니다.
+
+### testcontainers 사용에 관하여
+
+테스트의 멱등성과 실제 사용 DBMS 에 대한 테스트 신뢰성을 위하여 Testcontainers ([https://www.testcontainers.org/](https://www.testcontainers.org/)) 를 적용하였습니다. Testcontainers 를 이용한 테스트 케이스에서는 데이터의 롤백이나 사전 준비작업 등에 대한 처리를 하지 않아도 됩니다.
+
+Testcontainers 를 이용한 테스트 케이스 작성을 강제하지 않습니다. 하지만 반복하여 테스트 실행을 할 수 있도록 구현해야 합니다. 테스트를 위한 별도의 서비스가 준비되어야 한다면 install 가이드와 준비과정에 대한 문서를 제공해야 합니다.
+
+### 테스트 작성 가이드
+
+- [DataSource PostgreSQL JPA Repository 테스트 작성 가이드](https://github.com/dpTablo/spring-boot-template-reactive/wiki/DataSource-PostgreSQL-JPA-Repository-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1-%EA%B0%80%EC%9D%B4%EB%93%9C)
+- [DataSource PostreSQL QueryDSL Repository 테스트 작성 가이드](https://github.com/dpTablo/spring-boot-template-reactive/wiki/DataSource-PostreSQL-QueryDSL-Repository-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1-%EA%B0%80%EC%9D%B4%EB%93%9C)
+- [R2DBC PostgreSQL Repository 테스트 작성 가이드](https://github.com/dpTablo/spring-boot-template-reactive/wiki/R2DBC---PostgreSQL-Repository-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1-%EA%B0%80%EC%9D%B4%EB%93%9C)
+- [Reactive MongoDB Repository 테스트 작성 가이드](https://github.com/dpTablo/spring-boot-template-reactive/wiki/Reactive-MongoDB-Repository-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1-%EA%B0%80%EC%9D%B4%EB%93%9C)

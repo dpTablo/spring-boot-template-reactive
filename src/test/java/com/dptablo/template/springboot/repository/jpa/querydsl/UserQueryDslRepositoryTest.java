@@ -1,7 +1,7 @@
 package com.dptablo.template.springboot.repository.jpa.querydsl;
 
 import com.dptablo.template.springboot.configuration.JpaConfiguration;
-import com.dptablo.template.springboot.configuration.TestQueryDslConfiguration;
+import com.dptablo.template.springboot.configuration.QueryDslConfiguration;
 import com.dptablo.template.springboot.model.entity.User;
 import com.dptablo.template.springboot.repository.jpa.UserRepository;
 import com.dptablo.template.springboot.test.support.DataSourcePostgresTestSupportExtension;
@@ -14,7 +14,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Repository;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -29,9 +28,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("tc")
 @Testcontainers
 @ExtendWith(DataSourcePostgresTestSupportExtension.class)
-@Import(TestQueryDslConfiguration.class)
 @ContextConfiguration(classes = {
-        JpaConfiguration.class, UserQueryDslRepository.class, UserRepository.class
+        JpaConfiguration.class,
+        QueryDslConfiguration.class,
+        UserQueryDslRepository.class,
+        UserRepository.class
 })
 @EnableAutoConfiguration
 class UserQueryDslRepositoryTest {
