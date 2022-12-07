@@ -43,8 +43,8 @@ dependencies {
 
     /* database */
     implementation 'org.flywaydb:flyway-core:9.8.2'
-    implementation "org.mariadb.jdbc:mariadb-java-client:3.0.7"
-    implementation "org.postgresql:postgresql:42.4.2"
+    implementation "org.mariadb.jdbc:mariadb-java-client:3.1.0"
+    implementation "org.postgresql:postgresql:42.5.1"
 
     /* data - jpa */
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
