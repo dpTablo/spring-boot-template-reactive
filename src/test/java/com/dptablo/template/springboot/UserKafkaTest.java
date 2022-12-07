@@ -1,13 +1,19 @@
 package com.dptablo.template.springboot;
 
+import com.dptablo.template.springboot.configuration.*;
 import com.dptablo.template.springboot.kafka.consumer.LoginUserConsumer;
 import com.dptablo.template.springboot.kafka.producer.LoginUserProducer;
 import com.dptablo.template.springboot.model.kafka.LoginUserMessage;
+import com.dptablo.template.springboot.test.support.extension.TestContainersKafkaTestSupportExtension;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDateTime;
@@ -15,9 +21,18 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.*;
 
-@SpringBootTest
-@ActiveProfiles("local")
+@ActiveProfiles("tc")
 @Testcontainers
+@ExtendWith(SpringExtension.class)
+@ExtendWith(TestContainersKafkaTestSupportExtension.class)
+//@ContextConfiguration(classes = {
+//        KafkaConfiguration.class,
+//        KafkaTopicConfiguration.class,
+//        LoginUserProducer.class,
+//        LoginUserConsumer.class,
+//        PostgresR2dbcConfiguration.class
+//})
+//@EnableAutoConfiguration(exclude = PostgresR2dbcConfiguration.class)
 public class UserKafkaTest {
     @Autowired
     private LoginUserProducer loginUserProducer;
@@ -28,8 +43,8 @@ public class UserKafkaTest {
     private String topic = "userTopic";
 
     @Test
-    @DisplayName("kafka 테스트 작성중")
-    void test1() throws InterruptedException {
+    @DisplayName("LoginUserMessage 메세지 처리")
+    void loginUserMessageTest() throws InterruptedException {
         //given
         var message = LoginUserMessage.builder()
                 .userId("tablo")

@@ -3,6 +3,7 @@ package com.dptablo.template.springboot.test.support;
 import com.dptablo.template.springboot.configuration.FlywayConfiguration;
 import com.dptablo.template.springboot.model.r2dbc.User;
 import com.dptablo.template.springboot.repository.reactive.r2dbc.DefaultUserR2DbcRepository;
+import com.dptablo.template.springboot.test.support.extension.R2dbcPostgreSQLTestSupportExtension;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

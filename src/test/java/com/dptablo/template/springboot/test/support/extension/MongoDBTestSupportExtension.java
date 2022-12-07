@@ -1,5 +1,6 @@
-package com.dptablo.template.springboot.test.support;
+package com.dptablo.template.springboot.test.support.extension;
 
+import com.dptablo.template.springboot.test.support.TestContainersReactiveMongoDBTest;
 import com.dptablo.template.springboot.test.support.settings.TestContainersMongoDBDatabaseSettings;
 import org.junit.jupiter.api.extension.*;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

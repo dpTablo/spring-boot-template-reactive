@@ -3,8 +3,9 @@ package com.dptablo.template.springboot.configuration;
 import io.r2dbc.postgresql.PostgresqlConnectionConfiguration;
 import io.r2dbc.postgresql.PostgresqlConnectionFactory;
 import io.r2dbc.spi.ConnectionFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.r2dbc.R2dbcProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration;
@@ -19,20 +20,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
         basePackages = {"com.dptablo.template.springboot.repository.reactive.r2dbc"}
 )
 @EnableTransactionManagement
+@RequiredArgsConstructor
 public class PostgresR2dbcConfiguration extends AbstractR2dbcConfiguration {
-    @Value("${spring.r2dbc.url:}")
-    private String url;
-
-    @Value("${spring.r2dbc.username:}")
-    private String userName;
-
-    @Value("${spring.r2dbc.password:}")
-    private String password;
+    private final R2dbcProperties r2dbcProperties;
 
     @Override
     @Bean("r2dbcPostgresConnectionFactory")
     public ConnectionFactory connectionFactory() {
-        var url = this.url.replace("r2dbc:postgresql://", "");
+        var url = this.r2dbcProperties.getUrl().replace("r2dbc:postgresql://", "");
         var urls = url.split("/");
         var domains = urls[0].split(":");
         var host = domains[0];
@@ -44,8 +39,8 @@ public class PostgresR2dbcConfiguration extends AbstractR2dbcConfiguration {
                         .host(host)
                         .port(port)
                         .database(databaseName)
-                        .username(userName)
-                        .password(password)
+                        .username(r2dbcProperties.getUsername())
+                        .password(r2dbcProperties.getPassword())
                         .build());
     }
 

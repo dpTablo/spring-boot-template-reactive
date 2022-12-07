@@ -6,7 +6,7 @@ import com.dptablo.template.springboot.model.entity.User;
 import com.dptablo.template.springboot.model.entity.UserRole;
 import com.dptablo.template.springboot.model.entity.UserRoleMapping;
 import com.dptablo.template.springboot.model.enumtype.Role;
-import com.dptablo.template.springboot.test.support.DataSourcePostgresTestSupportExtension;
+import com.dptablo.template.springboot.test.support.extension.DataSourcePostgresTestSupportExtension;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

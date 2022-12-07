@@ -18,15 +18,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@RequiredArgsConstructor
 @EnableKafka
+@RequiredArgsConstructor
 public class KafkaConfiguration {
     private final KafkaProperties kafkaProperties;
-
-//    @Bean
-//    public ProducerFactory<String, Object> producerFactory() {
-//        return new DefaultKafkaProducerFactory<>(producerConfigMap());
-//    }
 
     @Bean
     public ProducerFactory<String, Object> producerFactory() {
@@ -41,11 +36,6 @@ public class KafkaConfiguration {
         configMap.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, CustomJsonSerializer.class);
         return configMap;
     }
-
-//    @Bean
-//    public ConsumerFactory<String, Object> consumerFactory() {
-//        return new DefaultKafkaConsumerFactory<>(consumerConfigMap());
-//    }
 
     @Bean
     public ConsumerFactory<String, Object> consumerFactory() {
@@ -65,24 +55,10 @@ public class KafkaConfiguration {
         return configMap;
     }
 
-//    @Bean
-//    public KafkaTemplate<String, Object> kafkaTemplate() {
-//        return new KafkaTemplate<>(producerFactory());
-//    }
-
     @Bean
     public KafkaTemplate<String, Object> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
-
-//    @Bean
-//    ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory(
-//            ConsumerFactory<String, Object> consumerFactory
-//    ) {
-//        var factory = new ConcurrentKafkaListenerContainerFactory<String, Object>();
-//        factory.setConsumerFactory(consumerFactory);
-//        return factory;
-//    }
 
     @Bean
     ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {

@@ -1,6 +1,6 @@
 package com.dptablo.template.springboot.repository.reactive.r2dbc;
 
-import com.dptablo.template.springboot.test.support.R2dbcPostgreSQLTestSupportExtension;
+import com.dptablo.template.springboot.test.support.extension.R2dbcPostgreSQLTestSupportExtension;
 import com.dptablo.template.springboot.configuration.FlywayConfiguration;
 import com.dptablo.template.springboot.model.r2dbc.User;
 import org.junit.jupiter.api.MethodOrderer;

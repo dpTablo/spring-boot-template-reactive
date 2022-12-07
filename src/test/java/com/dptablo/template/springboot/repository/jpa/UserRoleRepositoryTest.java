@@ -3,7 +3,7 @@ package com.dptablo.template.springboot.repository.jpa;
 import com.dptablo.template.springboot.configuration.JpaConfiguration;
 import com.dptablo.template.springboot.model.entity.UserRole;
 import com.dptablo.template.springboot.model.enumtype.Role;
-import com.dptablo.template.springboot.test.support.DataSourcePostgresTestSupportExtension;
+import com.dptablo.template.springboot.test.support.extension.DataSourcePostgresTestSupportExtension;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
