@@ -15,19 +15,19 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.*;
 
-@SpringBootTest
-@ActiveProfiles("local")
-@Testcontainers
+//@SpringBootTest
+//@ActiveProfiles("local")
+//@Testcontainers
 public class UserKafkaTest {
-    @Autowired
+//    @Autowired
     private LoginUserProducer loginUserProducer;
 
-    @Autowired
+//    @Autowired
     private LoginUserConsumer loginUserConsumer;
 
     private String topic = "userTopic";
 
-    @Test
+//    @Test
     @DisplayName("kafka 테스트 작성중")
     void test1() throws InterruptedException {
         //given

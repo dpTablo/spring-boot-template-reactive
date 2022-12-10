@@ -30,9 +30,16 @@ hs_err_pid*
 out/*
 build/*
 .gradle/*
+BOOT-INF/
 
 # docker mariadb
 docker/local_mariadb/db/
 
 # queryDSL
 src/main/generated/
+
+# restdocs spring static resources
+src/main/resources/static/docs
+
+
+
