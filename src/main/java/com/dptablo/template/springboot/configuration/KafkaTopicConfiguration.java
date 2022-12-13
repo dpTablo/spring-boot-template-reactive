@@ -11,20 +11,20 @@ import org.springframework.kafka.core.KafkaAdmin;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration
-@RequiredArgsConstructor
+//@Configuration
+//@RequiredArgsConstructor
 public class KafkaTopicConfiguration {
-    private final KafkaProperties kafkaProperties;
-
-    @Bean
-    public KafkaAdmin kafkaAdmin() {
-        Map<String, Object> configMap = new HashMap<>();
-        configMap.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
-        return new KafkaAdmin(configMap);
-    }
-
-    @Bean
-    public NewTopic userTopic() {
-         return new NewTopic("userTopic", 1, (short) 1);
-    }
+//    private final KafkaProperties kafkaProperties;
+//
+//    @Bean
+//    public KafkaAdmin kafkaAdmin() {
+//        Map<String, Object> configMap = new HashMap<>();
+//        configMap.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
+//        return new KafkaAdmin(configMap);
+//    }
+//
+//    @Bean
+//    public NewTopic userTopic() {
+//         return new NewTopic("userTopic", 1, (short) 1);
+//    }
 }

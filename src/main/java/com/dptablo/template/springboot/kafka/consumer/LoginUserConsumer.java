@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CountDownLatch;
 
-@Component
+//@Component
 @Slf4j
 @RequiredArgsConstructor
 public class LoginUserConsumer {

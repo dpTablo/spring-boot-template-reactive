@@ -42,17 +42,17 @@ spring:
         validate-on-migrate: true
         locations: classpath:db/migration,classpath:db/migration/postgresql
         enabled: true
-    kafka:
-        producer:
-            bootstrap-servers: localhost:9092
-        consumer:
-            bootstrap-servers: localhost:9092
-            auto-offset-reset: earliest
-            group-id: tablo-kafka-group
-            enable-auto-commit: true
-        listener:
-            ack-mode: manual
-        bootstrap-servers: localhost:9092
+#    kafka:
+#        producer:
+#            bootstrap-servers: localhost:9092
+#        consumer:
+#            bootstrap-servers: localhost:9092
+#            auto-offset-reset: earliest
+#            group-id: tablo-kafka-group
+#            enable-auto-commit: true
+#        listener:
+#            ack-mode: manual
+#        bootstrap-servers: localhost:9092
     data:
         mongodb:
             database: test_database

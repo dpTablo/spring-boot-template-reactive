@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 
-@Component
+//@Component
 @Slf4j
 @RequiredArgsConstructor
 public class UserKafkaConsumer {
