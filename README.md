@@ -121,6 +121,52 @@ test profile 을 이용하여 in-memory DB에 대한 테스트를 합니다. 하
 
 tc profile 에 testcontainers 를 사용에 필요한 사항을 설정하고 이를 사용하여 테스트 케이스 수행시 사용할 수 있습니다.
 
+# IDE 환경설정
+
+IDE는 intellij IDEA의 사용을 전제로 설명합니다. Intellij IDEA는 2022.3 를 기준으로 작성되었습니다.
+
+아래의 설정은 개발자의 설정의 기호에 따라 변경할 수 있습니다. 변경하게 되면 테스트 환경, QueryDSL 설정과 관련된 부분이 영향을 받을 수 있습니다.
+
+### Gradle 설정
+
+Settings > Build, Execution, Deployment > Build Tools > Gradle 에 아래 항목을 설정합니다.
+
+- Build and run using : IntelliJ IDEA
+- Run tests using : IntelliJ IDEA
+- Gradle JVM : Project SDK
+
+![](/document/readme/readme_gradle_settings_in_intellij.jpg)
+
+### Spring Boot Automatically
+
+Spring Boot 의 실행 상태에서 코드 수정에 대한 자동 빌드 후 reload 를 설정하는 방법에 대한 내용입니다.
+
+1. settings > Build, Execution, Deployment > Compiler 의 ’Build project automatically’ 를 활성화합니다.
+
+![](/document/readme/readme_build_automatically_in_intellij_01.png)
+
+2. Spring Boot 의 Run Configuration 의 아래 항목을 설정합니다.
+    - Modify Options > On ‘Update’ action : Update classes and resources
+    - Modify Options > On frame deactivation : Update classes and resources
+
+![](/document/readme/readme_build_automatically_in_intellij_02.png)
+
+### Annotation Prosessing
+
+Intellij의 Settings > Build, Execution, Deployment > Compiler > Annotation Processors 에서 아래와 같이 설정합니다. lombok, querydsl 등 어노테이션과 관련된 개발환경에 대한 빌드 클래스가 생성됩니다.
+
+설정값을 아래 이미지와 다르게 할 수 있습니다. 이 경우 변경된 사항에 맞추어 gradle과 IDE 설정을 변경해야 할 수 있습니다.
+
+![](/document/readme/readme_annotation_processing_settings_in_intellij.png)
+
+### Shorten command line
+
+Intellij 에서 Spring Boot, JUnit 테스트 등 run 을 실행할 경우 오류가 발생하는 경우 Shorten command line 으로 실행하십시오.
+
+> MacOS 에서는 오류가 발생하는 경우가 없었으며 Windows 11 에서 발생하였습니다.
+
+![](/document/readme/readme_shorten_command_line.png)
+
 # 테스트 코드 작성에 대하여
 
 ### 기본적인 테스트 작성 원칙
