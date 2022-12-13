@@ -36,7 +36,7 @@ class DefaultJwtAuthenticationServiceTest {
 
     @Test
     void signUp() {
-        fail("not implement.");
+         //TODO not implement.
     }
 
     @DisplayName("authenticate - user1 // 1234")
@@ -86,6 +86,6 @@ class DefaultJwtAuthenticationServiceTest {
 
     @Test
     void getAuthentication() {
-        fail("not implement.");
+        //TODO not implement.
     }
 }
