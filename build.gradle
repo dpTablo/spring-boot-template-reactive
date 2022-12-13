@@ -11,7 +11,6 @@ plugins {
     id "java"
     id "org.springframework.boot" version "3.0.0"
     id "io.spring.dependency-management" version "1.1.0"
-    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id "idea"
     id "org.asciidoctor.jvm.convert" version "3.3.2"
 }
@@ -78,6 +77,7 @@ dependencies {
     /* testing */
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.junit.platform:junit-platform-launcher'
     testCompileOnly "org.projectlombok:lombok"
     testAnnotationProcessor "org.projectlombok:lombok"
 
@@ -120,28 +120,16 @@ tasks {
     }
 }
 
-/* queryDSL */
-def queryDslDir = "$buildDir/generated/querydsl"
-
-querydsl {
-    jpa = true
-    library = "com.querydsl:querydsl-apt:${queryDslVersion}"
-    querydslSourcesDir = queryDslDir
-}
-
-sourceSets {
-    main.java.srcDir queryDslDir
-}
-
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
-    querydsl.extendsFrom compileClasspath
 }
 
-compileQuerydsl {
-    options.annotationProcessorPath = configurations.querydsl
+clean {
+    delete 'src/main/generated'
+    delete 'src/test/generated_tests'
+    delete 'out'
 }
 
 /* Spring RestDocs */
