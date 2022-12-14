@@ -20,8 +20,10 @@ spring boot reactive 프로젝트를 위한 템플릿 입니다.
 - gradle 7.5.1 (release 2022.08.05)
 - QueryDSL 5.0.0
 - flyway 9.8.2
+- PostgreSQL 14.6
 - PostgreSQL Driver 42.5.1
 - PostgreSQL R2DBC Driver 1.0.0.RELEASE
+- Mongo DB 6.0.3
 - restdocs 2.0.6.RELEASE
 - junit jupiter 5.9.1, assertj 3.23.1
 - testcontainers 1.17.6
