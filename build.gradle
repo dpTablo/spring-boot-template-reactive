@@ -32,10 +32,14 @@ configurations {
 
 dependencies {
     /* spring */
-    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation ("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.boot:spring-boot-starter-webflux"
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
 
     implementation 'org.springframework.kafka:spring-kafka'
 
