@@ -3,7 +3,7 @@ buildscript {
         queryDslVersion = "5.0.0"
         testcontainersVersion = "1.17.6"
         snippetsDir = file('build/generated-snippets')
-        restdocsVersion = '2.0.6.RELEASE'
+        restdocsVersion = '3.0.0'
     }
 }
 
@@ -72,6 +72,7 @@ dependencies {
     /* utils */
     implementation 'org.apache.commons:commons-lang3'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
     /* dev */
     developmentOnly "org.springframework.boot:spring-boot-devtools"
@@ -82,6 +83,8 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'io.projectreactor:reactor-test:3.5.1'
+
     testCompileOnly "org.projectlombok:lombok"
     testAnnotationProcessor "org.projectlombok:lombok"
 
@@ -109,6 +112,7 @@ dependencies {
     /* Spring RestDocs */
     asciidoctorExtensions "org.springframework.restdocs:spring-restdocs-asciidoctor:$restdocsVersion"
     testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc"
+    testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient'
 }
 
 java {

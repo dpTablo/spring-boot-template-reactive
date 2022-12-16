@@ -1,0 +1,26 @@
+= v3 사용자 API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+== GET
+
+=== 특정 유저 정보 조회
+
+==== Path Parameters
+include::{snippets}/v3-user-getUser/path-parameters.adoc[]
+
+==== HTTP request
+include::{snippets}/v3-user-getUser/http-request.adoc[]
+
+==== HTTP response
+include::{snippets}/v3-user-getUser/http-response.adoc[]
+
+==== Response Fields
+include::{snippets}/v3-user-getUser/response-fields.adoc[]
+
+==== Response Body
+include::{snippets}/v3-user-getUser/response-body.adoc[]
