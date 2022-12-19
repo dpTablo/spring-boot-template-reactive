@@ -1,6 +1,6 @@
 package com.dptablo.template.springboot.model.dto.mongo.reactive;
 
-import com.dptablo.template.springboot.model.mongo.User;
+import com.dptablo.template.springboot.model.mongo.reactive.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.dptablo.template.springboot.service.r2dbc;
 
 import com.dptablo.template.springboot.model.r2dbc.User;
-import com.dptablo.template.springboot.repository.reactive.r2dbc.UserCustomR2dbcRepository;
+import com.dptablo.template.springboot.repository.r2dbc.UserCustomR2dbcRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

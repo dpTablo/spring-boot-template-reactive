@@ -1,7 +1,7 @@
 package com.dptablo.template.springboot.service.mongo.reactive;
 
-import com.dptablo.template.springboot.model.mongo.User;
-import com.dptablo.template.springboot.repository.reactive.mongodb.UserReactiveRepository;
+import com.dptablo.template.springboot.model.mongo.reactive.User;
+import com.dptablo.template.springboot.repository.mongodb.reactive.UserReactiveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

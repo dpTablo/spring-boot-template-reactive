@@ -1,4 +1,4 @@
-package com.dptablo.template.springboot.model.mongo;
+package com.dptablo.template.springboot.model.mongo.reactive;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;

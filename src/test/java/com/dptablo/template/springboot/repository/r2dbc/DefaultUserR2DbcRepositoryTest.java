@@ -1,4 +1,4 @@
-package com.dptablo.template.springboot.repository.reactive.r2dbc;
+package com.dptablo.template.springboot.repository.r2dbc;
 
 import com.dptablo.template.springboot.test.support.R2dbcPostgreSQLTestSupportExtension;
 import com.dptablo.template.springboot.configuration.FlywayConfiguration;

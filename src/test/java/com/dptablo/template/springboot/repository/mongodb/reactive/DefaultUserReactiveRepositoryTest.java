@@ -1,7 +1,7 @@
-package com.dptablo.template.springboot.repository.reactive.mongodb;
+package com.dptablo.template.springboot.repository.mongodb.reactive;
 
 import com.dptablo.template.springboot.configuration.ReactiveMongoDBConfiguration;
-import com.dptablo.template.springboot.model.mongo.User;
+import com.dptablo.template.springboot.model.mongo.reactive.User;
 import com.dptablo.template.springboot.test.support.MongoDBTestSupportExtension;
 import com.dptablo.template.springboot.test.support.TestContainersReactiveMongoDBTest;
 import org.junit.jupiter.api.DisplayName;

@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
 @Configuration
-@EnableReactiveMongoRepositories(basePackages = "com.dptablo.template.springboot.repository.reactive.mongodb")
+@EnableReactiveMongoRepositories(basePackages = "com.dptablo.template.springboot.repository.mongodb.reactive")
 @RequiredArgsConstructor
 public class ReactiveMongoDBConfiguration {
     private final MongoProperties mongoProperties;

@@ -4,7 +4,7 @@ import com.dptablo.template.springboot.configuration.SecurityConfiguration;
 import com.dptablo.template.springboot.controller.mongo.reactive.ReactiveUserApiController;
 import com.dptablo.template.springboot.model.dto.mongo.reactive.UpdateUserDto;
 import com.dptablo.template.springboot.model.dto.mongo.reactive.UserDto;
-import com.dptablo.template.springboot.model.mongo.User;
+import com.dptablo.template.springboot.model.mongo.reactive.User;
 import com.dptablo.template.springboot.security.jwt.JwtRequestFilter;
 import com.dptablo.template.springboot.service.mongo.reactive.ReactiveUserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -54,15 +54,35 @@ import static org.springframework.security.test.web.reactive.server.SecurityMock
                 @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = JwtRequestFilter.class)
         }
 )
-//@WebFluxTest(ReactiveUserApiController.class)
-//@AutoConfigureMockMvc(addFilters = false)
-//@Import(WebFluxControllerSecurityTestConfiguration.class)
 class ReactiveUserApiControllerTest {
     private WebTestClient webTestClient;
 
     @Qualifier("defaultReactiveUserService")
     @MockBean
     private ReactiveUserService userService;
+
+    private FieldDescriptor[] userDtoFieldDescriptors = new FieldDescriptor[] {
+            fieldWithPath("userId").description("유저 id"),
+            fieldWithPath("name").description("유져 이름"),
+            fieldWithPath("phoneNumber").description("휴대폰번호"),
+            fieldWithPath("createDate").description("등록일자"),
+            fieldWithPath("updateDate").description("변경일자")
+    };
+
+    private FieldDescriptor[] updateUserDtoFieldDescriptors = new FieldDescriptor[] {
+            fieldWithPath("userId").description("유저 id"),
+            fieldWithPath("password").description("비밀번호"),
+            fieldWithPath("name").description("유져 이름"),
+            fieldWithPath("phoneNumber").description("휴대폰번호"),
+            fieldWithPath("createDate").description("등록일자"),
+            fieldWithPath("updateDate").description("변경일자")
+    };
+
+    private FieldDescriptor[] responseDtoFieldDescriptors = new FieldDescriptor[] {
+            fieldWithPath("code").description("결과 코드"),
+            fieldWithPath("message").description("서버 메세지"),
+            subsectionWithPath("data").description("데이터")
+    };
 
     @BeforeEach
     void setUp(ApplicationContext applicationContext, RestDocumentationContextProvider restDocumentation) {
@@ -132,15 +152,6 @@ class ReactiveUserApiControllerTest {
 
         given(userService.searchUserByNameLike("석")).willReturn(Flux.just(user1, user2));
 
-        //restdocs
-        var userFieldDescriptors = new FieldDescriptor[] {
-                fieldWithPath("userId").description("유저 id"),
-                fieldWithPath("name").description("유져 이름"),
-                fieldWithPath("phoneNumber").description("휴대폰번호"),
-                fieldWithPath("createDate").description("등록일자"),
-                fieldWithPath("updateDate").description("변경일자")
-        };
-
         //when
         var jsonData = webTestClient.get().uri(uriBuilder -> uriBuilder
                         .path("/api/v3/user/search")
@@ -157,7 +168,7 @@ class ReactiveUserApiControllerTest {
                                 ),
                                 responseFields(
                                         fieldWithPath("[]").description("유저 리스트")
-                                ).andWithPrefix("[].", userFieldDescriptors)
+                                ).andWithPrefix("[].", userDtoFieldDescriptors)
                         ))
                 .returnResult().getResponseBody();
         var jsonStringValue = new String(jsonData);
@@ -197,30 +208,6 @@ class ReactiveUserApiControllerTest {
 
         given(userService.addUser(any(User.class)))
                 .willAnswer(invocation -> Mono.just(invocation.getArgument(0)));
-
-        //restdocs
-        var updateUserDtoFieldDescriptors = new FieldDescriptor[] {
-                fieldWithPath("userId").description("유저 id"),
-                fieldWithPath("password").description("비밀번호"),
-                fieldWithPath("name").description("유져 이름"),
-                fieldWithPath("phoneNumber").description("휴대폰번호"),
-                fieldWithPath("createDate").description("등록일자"),
-                fieldWithPath("updateDate").description("변경일자")
-        };
-
-        var responseDtoFieldDescriptors = new FieldDescriptor[] {
-                fieldWithPath("code").description("결과 코드"),
-                fieldWithPath("message").description("서버 메세지"),
-                subsectionWithPath("data").description("데이터")
-        };
-
-        var userDtoFieldDescriptors = new FieldDescriptor[] {
-                fieldWithPath("userId").description("유저 id"),
-                fieldWithPath("name").description("유져 이름"),
-                fieldWithPath("phoneNumber").description("휴대폰번호"),
-                fieldWithPath("createDate").description("등록일자"),
-                fieldWithPath("updateDate").description("변경일자")
-        };
 
         //when & then
         webTestClient
@@ -274,30 +261,6 @@ class ReactiveUserApiControllerTest {
                     user.setUserId(invocation.getArgument(0));
                     return Mono.just(user);
                 });
-
-        //restdocs
-        var updateUserDtoFieldDescriptors = new FieldDescriptor[] {
-                fieldWithPath("userId").description("유저 id"),
-                fieldWithPath("password").description("비밀번호"),
-                fieldWithPath("name").description("유져 이름"),
-                fieldWithPath("phoneNumber").description("휴대폰번호"),
-                fieldWithPath("createDate").description("등록일자"),
-                fieldWithPath("updateDate").description("변경일자")
-        };
-
-        var responseDtoFieldDescriptors = new FieldDescriptor[] {
-                fieldWithPath("code").description("결과 코드"),
-                fieldWithPath("message").description("서버 메세지"),
-                subsectionWithPath("data").description("데이터")
-        };
-
-        var userDtoFieldDescriptors = new FieldDescriptor[] {
-                fieldWithPath("userId").description("유저 id"),
-                fieldWithPath("name").description("유져 이름"),
-                fieldWithPath("phoneNumber").description("휴대폰번호"),
-                fieldWithPath("createDate").description("등록일자"),
-                fieldWithPath("updateDate").description("변경일자")
-        };
 
         //when & then
         webTestClient
