@@ -178,5 +178,4 @@ class UserReactiveRepositoryTest implements TestContainersReactiveMongoDBTest {
                 })
                 .verifyComplete();
     }
-
 }

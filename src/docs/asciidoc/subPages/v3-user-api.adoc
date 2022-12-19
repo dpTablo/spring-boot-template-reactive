@@ -13,10 +13,16 @@
 ==== Path Parameters
 include::{snippets}/v3-user-getUser/path-parameters.adoc[]
 
-==== HTTP request
+==== CURL Request
+include::{snippets}/v3-user-getUser/curl-request.adoc[]
+
+==== HTTP Request
 include::{snippets}/v3-user-getUser/http-request.adoc[]
 
-==== HTTP response
+==== Request Body
+include::{snippets}/v3-user-getUser/request-body.adoc[]
+
+==== HTTP Response
 include::{snippets}/v3-user-getUser/http-response.adoc[]
 
 ==== Response Fields
@@ -24,3 +30,104 @@ include::{snippets}/v3-user-getUser/response-fields.adoc[]
 
 ==== Response Body
 include::{snippets}/v3-user-getUser/response-body.adoc[]
+
+=== 유저명 검색 조회
+==== Query Parameters
+include::{snippets}/v3-user-searchUserByNameLike/query-parameters.adoc[]
+
+==== Request Body
+include::{snippets}/v3-user-searchUserByNameLike/request-body.adoc[]
+
+==== CURL Request
+include::{snippets}/v3-user-searchUserByNameLike/curl-request.adoc[]
+
+==== HTTP Request
+include::{snippets}/v3-user-searchUserByNameLike/http-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/v3-user-searchUserByNameLike/http-response.adoc[]
+
+==== Response Fields
+include::{snippets}/v3-user-searchUserByNameLike/response-fields.adoc[]
+
+==== Response Body
+include::{snippets}/v3-user-searchUserByNameLike/response-body.adoc[]
+
+
+== POST
+
+=== 유저 등록
+
+==== Request Body
+include::{snippets}/v3-user-addUser/request-body.adoc[]
+
+==== Request Fields
+include::{snippets}/v3-user-addUser/request-fields.adoc[]
+
+==== CURL Request
+include::{snippets}/v3-user-addUser/curl-request.adoc[]
+
+==== HTTP Request
+include::{snippets}/v3-user-addUser/http-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/v3-user-addUser/http-response.adoc[]
+
+==== Response Fields
+include::{snippets}/v3-user-addUser/response-fields.adoc[]
+
+==== Response Body
+include::{snippets}/v3-user-addUser/response-body.adoc[]
+
+
+== UPDATE
+
+=== 유저 변경
+
+==== Request Body
+include::{snippets}/v3-user-updateUser/request-body.adoc[]
+
+==== Request Fields
+include::{snippets}/v3-user-updateUser/request-fields.adoc[]
+
+==== CURL Request
+include::{snippets}/v3-user-updateUser/curl-request.adoc[]
+
+==== HTTP Request
+include::{snippets}/v3-user-updateUser/http-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/v3-user-updateUser/http-response.adoc[]
+
+==== Response Fields
+include::{snippets}/v3-user-updateUser/response-fields.adoc[]
+
+==== Response Body
+include::{snippets}/v3-user-updateUser/response-body.adoc[]
+
+
+
+== DELETE
+
+=== 유저 삭제
+
+==== Path Parameters
+include::{snippets}/v3-user-deleteUser/path-parameters.adoc[]
+
+==== Request Body
+include::{snippets}/v3-user-deleteUser/request-body.adoc[]
+
+==== CURL Request
+include::{snippets}/v3-user-deleteUser/curl-request.adoc[]
+
+==== HTTP Request
+include::{snippets}/v3-user-deleteUser/http-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/v3-user-deleteUser/http-response.adoc[]
+
+==== Response Body
+include::{snippets}/v3-user-deleteUser/response-body.adoc[]
+
+
+

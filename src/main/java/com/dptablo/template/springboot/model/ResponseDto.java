@@ -1,14 +1,14 @@
 package com.dptablo.template.springboot.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
-public class ResponseDto {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ResponseDto<T> {
     private int code;
     private String message;
-    private HttpDto data;
+    private T data;
 }

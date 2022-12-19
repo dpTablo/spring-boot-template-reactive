@@ -1,7 +1,6 @@
 package com.dptablo.template.springboot.model.dto;
 
 import com.dptablo.template.springboot.model.entity.User;
-import com.dptablo.template.springboot.model.HttpDto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class UserDto {
     @NoArgsConstructor
     @Data
-    public static class SimpleUser implements HttpDto {
+    public static class SimpleUser {
         private String userId;
         private String phoneNumber;
 

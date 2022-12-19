@@ -11,8 +11,14 @@
 
 === 전체 유저 목록 조회
 
+==== curl request
+include::{snippets}/user-getAllUserList/curl-request.adoc[]
+
 ==== HTTP request
 include::{snippets}/user-getAllUserList/http-request.adoc[]
+
+==== Request Body
+include::{snippets}/user-getAllUserList/request-body.adoc[]
 
 ==== HTTP response
 include::{snippets}/user-getAllUserList/http-response.adoc[]
