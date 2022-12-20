@@ -69,3 +69,15 @@ logging:
         org.hibernate.sql: debug
         org.hibernate.type.descriptor.sql: trace
         io.r2dbc.sql: TRACE
+springdoc:
+    default-produces-media-type: application/x-yaml;charset=UTF-8
+    default-consumes-media-type: application/x-yaml;charset=UTF-8
+#    packages-to-scan: com.dptablo.template.springboot
+    cache:
+        disabled: true
+    api-docs:
+        enabled: false
+        path: /openApi.yaml
+    swagger-ui:
+        path: /api/v3/swagger-ui.html
+        url: /openApi.yaml

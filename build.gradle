@@ -4,6 +4,8 @@ buildscript {
         testcontainersVersion = "1.17.6"
         snippetsDir = file('build/generated-snippets')
         restdocsVersion = '3.0.0'
+        epagesRestdocsVersion = '0.16.2'
+        springdocOpenApiVersion = '2.0.2'
     }
 }
 
@@ -13,6 +15,9 @@ plugins {
     id "io.spring.dependency-management" version "1.1.0"
     id "idea"
     id "org.asciidoctor.jvm.convert" version "3.3.2"
+
+    // com.epages.restdocs-api-spec 의 spring boot 3.x 지원 업데이트에 맞추어 추후 적용 예정
+//    id 'com.epages.restdocs-api-spec' version "0.16.2"
 }
 
 repositories {
@@ -111,8 +116,19 @@ dependencies {
 
     /* Spring RestDocs */
     asciidoctorExtensions "org.springframework.restdocs:spring-restdocs-asciidoctor:$restdocsVersion"
-    testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc"
-    testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient'
+    testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc:$restdocsVersion"
+    testImplementation "org.springframework.restdocs:spring-restdocs-webtestclient:$restdocsVersion"
+
+    /* SpringDoc OpenAPI */
+    implementation "org.springdoc:springdoc-openapi-starter-common:$springdocOpenApiVersion"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocOpenApiVersion"
+    implementation "org.springdoc:springdoc-openapi-starter-webflux-ui:$springdocOpenApiVersion"
+
+    /* com.epages restdocs-api-spec */
+    // com.epages.restdocs-api-spec 의 spring boot 3.x 지원 업데이트에 맞추어 추후 적용 예정
+//    implementation "com.epages:restdocs-api-spec:$epagesRestdocsVersion"
+//    testImplementation "com.epages:restdocs-api-spec-mockmvc:$epagesRestdocsVersion"
+//    testImplementation "com.epages:restdocs-api-spec-webtestclient:$epagesRestdocsVersion"
 }
 
 java {
@@ -185,3 +201,22 @@ build {
     dependsOn copyDocumentToStatic
     dependsOn copyDocumentToJar
 }
+
+// com.epages.restdocs-api-spec 의 spring boot 3.x 지원 업데이트에 맞추어 추후 적용 예정
+//openapi {
+//    host = 'localhost:9090'
+//    basePath = '/api/v3'
+//    schemes = ['http']
+//    format = 'yaml'
+//    title = 'My API'
+//    version = '1.0.0'
+//    description = 'My API description'
+//}
+//
+//openapi3 {
+//    setServer("http://localhost:9090")
+//    title = "restdocs-swagger API Documentation"
+//    description = "Spring REST Docs with SwaggerUI."
+//    version = "1.0.0"
+//    format = "yaml"
+//}

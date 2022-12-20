@@ -26,3 +26,13 @@ server:
         threads:
             min-spare: 20
             max: 200
+springdoc:
+    default-produces-media-type: application/json;charset=UTF-8
+    default-consumes-media-type: application/json;charset=UTF-8
+    packages-to-scan: com.dptablo.template.springboot
+    cache:
+        disabled: true
+    api-docs:
+        path: /api/v3/docs
+    swagger-ui:
+        path: /api/v3/swagger-ui.html

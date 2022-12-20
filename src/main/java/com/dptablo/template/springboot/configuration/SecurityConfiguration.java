@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -23,13 +22,16 @@ public class SecurityConfiguration {
         return web -> web.ignoring().requestMatchers(
             "/",
             "/images/**",
-            "/docs/**",
-            "/swagger-ui/**",
-            "/api-docs/**",
             "/login",
             "/api/authenticate",
             "/api/logout",
-            "/api/user"
+            "/api/user",
+
+            "/api-docs",
+            "/api/v3/swagger",
+            "/api/v3/docs",
+            "/swagger-ui.html",
+            "/api-docs"
         );
     }
 
@@ -45,9 +47,18 @@ public class SecurityConfiguration {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
                 .authorizeHttpRequests()
-                    .requestMatchers("/api/**")
-                        .hasRole("USER")
-                    .anyRequest().authenticated();
+                        .anyRequest().permitAll();
+
+//                .authorizeHttpRequests()
+//                    .requestMatchers(
+//                            "/api/v3/swagger",
+//                            "/api/v3/docs",
+//                            "/api-docs",
+//                            "/swagger-ui.html",
+//                            "/api-docs").permitAll()
+//                    .requestMatchers("/api/**")
+//                        .hasRole("USER")
+//                    .anyRequest().authenticated();
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 

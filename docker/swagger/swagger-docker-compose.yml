@@ -1,0 +1,14 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: swagger-ui
+    ports:
+      - "80:8080"
+#    volumes:
+#      - ./doc:/usr/share/nginx/html/doc
+    environment:
+      SWAGGER_JSON: ../../src/main/resources/openApi.yaml
+#      API_URL: doc/openapi.yaml

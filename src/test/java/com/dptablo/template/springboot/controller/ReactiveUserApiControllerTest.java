@@ -25,6 +25,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.payload.FieldDescriptor;
+import org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -87,7 +88,7 @@ class ReactiveUserApiControllerTest {
     @BeforeEach
     void setUp(ApplicationContext applicationContext, RestDocumentationContextProvider restDocumentation) {
         this.webTestClient = WebTestClient.bindToApplicationContext(applicationContext).configureClient()
-                .filter(documentationConfiguration(restDocumentation))
+                .filter(WebTestClientRestDocumentation.documentationConfiguration(restDocumentation))
                 .build();
     }
 
