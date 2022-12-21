@@ -1,15 +1,15 @@
-spring boot reactive 프로젝트를 위한 템플릿 입니다.
-
-업데이트 기준일 : 2022년 9월 18일
+spring boot reactive 프로젝트를 위한 템플릿 입니다. 
+JPA에 대한 설정도 포함되어 있습니다.
 
 # 목차
 - [주요 내용에 대한 설명](#주요-내용에-대한-설명)
 - [프로젝트 표준 구성 사용 시 알아두어야 할 사항](#프로젝트-표준-구성-사용-시-알아두어야-할-사항)
 - [profile 구분](#profile-구분)
+- [API 문서 작성](#api-문서-작성)
 - [테스트 코드 작성에 대하여](#테스트-코드-작성에-대하여)
 ---
 
-작성기준일 : 2022년 12월 7일
+작성기준일 : 2022년 12월 21일
 
 # 주요 내용에 대한 설명
 
@@ -168,6 +168,36 @@ Intellij 에서 Spring Boot, JUnit 테스트 등 run 을 실행할 경우 오류
 > MacOS 에서는 오류가 발생하는 경우가 없었으며 Windows 11 에서 발생하였습니다.
 
 ![](/document/readme/readme_shorten_command_line.png)
+
+# API 문서 작성
+
+프로젝트 API 문서 작성은 아래 주요 사항을 준수합니다.
+
+- [Open API 3](https://www.openapis.org/) Spec으로 작성합니다.
+- Open API 3 Spec의 파일 포맷은 YAML로 작성합니다.
+- [Spring REST Docs](https://docs.spring.io/spring-restdocs/docs/current/reference/htmlsingle/#documenting-your-api) 로 테스트 기반의 API 문서 작성하며, 작성된 문서에서 OAS 3 Spec을 생성합니다.
+
+프로젝트 개발 여건에 따라 문서를 작성하는 방식은 선택할 수 있습니다. 가장 권장되는 방법은 Spring REST Docs를 사용하는 것입니다.
+
+Spring REST Docs 로 작성할 수 없다면 아래 방법을 선택하십시오.
+
+- OAS3 Spec의 java 어노테이션을 이용한 작성 방법 (swagger v3 oas)
+- OAS3 Spec 규격의 YAML 문서를 작성 (어노테이션을 사용하지 않는 방법)
+
+### OAS3 Spec 규격의 YAML 문서를 작성에 대하여
+
+`src/docs/oas-doc.yaml` 에 문서 내용을 작성합니다. 작성된 spec은 검증이 되었다는 것을 전제로 이를 배포합니다.
+
+만약 Spring REST Docs 를 사용했다면 위 spec 파일의 내용은 작성하지 않으며, Spring REST Docs를 이용하여 OAS 3 Spec 을 생성해야 합니다.
+
+### Spring REST Docs를 OAS 3로 변환하는 것에 대하여
+
+아래 오픈 소스 프로젝트를 이용하여 변환할 수 있습니다.
+
+[https://github.com/ePages-de/restdocs-api-spec](https://github.com/ePages-de/restdocs-api-spec)
+
+> 아직 Spring Boot 3.x 에서 사용할 수 없으며, 추후 업데이트에 따라 적용될 예정입니다.
+>
 
 # 테스트 코드 작성에 대하여
 

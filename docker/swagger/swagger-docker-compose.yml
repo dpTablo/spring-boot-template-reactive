@@ -7,8 +7,8 @@ services:
     container_name: swagger-ui
     ports:
       - "80:8080"
-#    volumes:
-#      - ./doc:/usr/share/nginx/html/doc
+    volumes:
+      - ../../build/doc:/usr/share/nginx/html/doc
     environment:
-      SWAGGER_JSON: ../../src/main/resources/openApi.yaml
-#      API_URL: doc/openapi.yaml
+      SWAGGER_JSON: doc/oas-doc.yaml
+      API_URL: doc/oas-doc.yaml
