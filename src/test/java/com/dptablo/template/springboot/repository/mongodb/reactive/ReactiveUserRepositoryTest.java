@@ -31,13 +31,13 @@ import static org.assertj.core.api.Assertions.*;
 @ExtendWith(MongoDBTestSupportExtension.class)
 @ContextConfiguration(classes = {
         ReactiveMongoDBConfiguration.class,
-        UserReactiveRepository.class,
+        ReactiveUserRepository.class,
 })
 @EnableAutoConfiguration
-class UserReactiveRepositoryTest implements TestContainersReactiveMongoDBTest {
+class ReactiveUserRepositoryTest implements TestContainersReactiveMongoDBTest {
     @Autowired
-    @Qualifier("userReactiveRepository")
-    private UserReactiveRepository userReactiveRepository;
+    @Qualifier("reactiveUserRepository")
+    private ReactiveUserRepository reactiveUserRepository;
 
     @Autowired
     private ReactiveMongoTemplate reactiveMongoTemplate;
@@ -61,7 +61,7 @@ class UserReactiveRepositoryTest implements TestContainersReactiveMongoDBTest {
                 .build();
 
         //when
-        var savedUser = userReactiveRepository.save(user).block();
+        var savedUser = reactiveUserRepository.save(user).block();
 
         //then
         assertThat(savedUser).isEqualTo(user);
@@ -79,7 +79,8 @@ class UserReactiveRepositoryTest implements TestContainersReactiveMongoDBTest {
                 .createDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
                 .build();
-        var savedUser = userReactiveRepository.save(user).block();
+        var savedUser = reactiveUserRepository.save(user).blockOptional()
+                .orElseThrow(NullPointerException::new);
 
         savedUser.setName("일반유저1");
         savedUser.setPassword("5678");
@@ -88,8 +89,8 @@ class UserReactiveRepositoryTest implements TestContainersReactiveMongoDBTest {
         savedUser.setCreateDate(LocalDateTime.of(2022, 12, 10, 11, 10, 20));
 
         //when
-        userReactiveRepository.save(savedUser).block();
-        var updatedUser = userReactiveRepository.findById("admin").block();
+        reactiveUserRepository.save(savedUser).block();
+        var updatedUser = reactiveUserRepository.findById("admin").block();
 
         //then
         assertThat(updatedUser).isEqualTo(savedUser);
@@ -108,11 +109,12 @@ class UserReactiveRepositoryTest implements TestContainersReactiveMongoDBTest {
                 .createDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
                 .build();
-        var savedUser = userReactiveRepository.save(user).block();
+        var savedUser = reactiveUserRepository.save(user).blockOptional()
+                .orElseThrow(NullPointerException::new);
 
         //when
-        userReactiveRepository.delete(savedUser).block();
-        var foundUser = userReactiveRepository.findById(user.getUserId()).block();
+        reactiveUserRepository.delete(savedUser).block();
+        var foundUser = reactiveUserRepository.findById(user.getUserId()).block();
 
         //then
         assertThat(foundUser).isNull();
@@ -132,7 +134,7 @@ class UserReactiveRepositoryTest implements TestContainersReactiveMongoDBTest {
                 .createDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
                 .build();
-        userReactiveRepository.save(user1).block();
+        reactiveUserRepository.save(user1).block();
 
         var user2 = User.builder()
                 .userId("user2")
@@ -142,7 +144,7 @@ class UserReactiveRepositoryTest implements TestContainersReactiveMongoDBTest {
                 .createDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
                 .build();
-        userReactiveRepository.save(user2).block();
+        reactiveUserRepository.save(user2).block();
 
         var user3 = User.builder()
                 .userId("user3")
@@ -152,7 +154,7 @@ class UserReactiveRepositoryTest implements TestContainersReactiveMongoDBTest {
                 .createDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
                 .build();
-        userReactiveRepository.save(user3).block();
+        reactiveUserRepository.save(user3).block();
 
         var user4 = User.builder()
                 .userId("user4")
@@ -162,10 +164,10 @@ class UserReactiveRepositoryTest implements TestContainersReactiveMongoDBTest {
                 .createDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
                 .build();
-        userReactiveRepository.save(user4).block();
+        reactiveUserRepository.save(user4).block();
 
         //when
-        Flux<User> usersFlux = userReactiveRepository.findByNameLike("길");
+        Flux<User> usersFlux = reactiveUserRepository.findByNameLike("길");
 
         //then
         StepVerifier
@@ -173,7 +175,7 @@ class UserReactiveRepositoryTest implements TestContainersReactiveMongoDBTest {
                 .recordWith(ArrayList::new)
                 .expectNextCount(2)
                 .consumeRecordedWith(record -> {
-                        var list = record.stream().map(item -> item.getName()).collect(Collectors.toList());
+                        var list = record.stream().map(User::getName).collect(Collectors.toList());
                         assertThat(list).contains("김길동", "이한길");
                 })
                 .verifyComplete();

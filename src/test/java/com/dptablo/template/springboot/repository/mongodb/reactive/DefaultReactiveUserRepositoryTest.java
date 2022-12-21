@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.*;
         DefaultUserReactiveRepository.class,
 })
 @EnableAutoConfiguration
-class DefaultUserReactiveRepositoryTest implements TestContainersReactiveMongoDBTest {
+class DefaultReactiveUserRepositoryTest implements TestContainersReactiveMongoDBTest {
     @Autowired
     @Qualifier("defaultUserReactiveRepository")
     private DefaultUserReactiveRepository defaultUserReactiveRepository;
