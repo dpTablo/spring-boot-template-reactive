@@ -24,7 +24,7 @@ JPA에 대한 설정도 포함되어 있습니다.
 - PostgreSQL Driver 42.5.1
 - PostgreSQL R2DBC Driver 1.0.0.RELEASE
 - Mongo DB 6.0.3
-- restdocs 2.0.6.RELEASE
+- restdocs 3.0.0
 - junit jupiter 5.9.1, assertj 3.23.1
 - testcontainers 1.17.6
 
