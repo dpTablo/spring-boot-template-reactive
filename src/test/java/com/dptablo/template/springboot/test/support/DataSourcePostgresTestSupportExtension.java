@@ -41,18 +41,6 @@ public class DataSourcePostgresTestSupportExtension implements
     }
 
     @Override
-    public void afterAll(ExtensionContext context) throws Exception {
-        if(postgresContainer != null && postgresContainer.isRunning()) {
-            postgresContainer.stop();
-        }
-    }
-
-    @Override
-    public void afterEach(ExtensionContext context) throws Exception {
-
-    }
-
-    @Override
     public void beforeAll(ExtensionContext context) throws Exception {
         postgresContainer = new PostgreSQLContainer<>(TestContainersPostgresDatabaseSettings.POSTGRES_IMAGES_TAG)
                 .withDatabaseName(TestContainersPostgresDatabaseSettings.POSTGRES_DATABASE_NAME)
@@ -62,6 +50,24 @@ public class DataSourcePostgresTestSupportExtension implements
 
         setupSpringApplicationConfiguration();
         initFlyway();
+    }
+
+    @Override
+    public void afterAll(ExtensionContext context) throws Exception {
+        if(postgresContainer != null && postgresContainer.isRunning()) {
+            postgresContainer.stop();
+        }
+    }
+
+    @Override
+    public void beforeEach(ExtensionContext context) throws Exception {
+        flyway.clean();
+        flyway.migrate();
+    }
+
+    @Override
+    public void afterEach(ExtensionContext context) throws Exception {
+
     }
 
     private void initFlyway() {
@@ -87,11 +93,5 @@ public class DataSourcePostgresTestSupportExtension implements
 
         System.setProperty("spring.flyway.enabled", "true");
         System.setProperty("spring.flyway.url", postgresContainer.getJdbcUrl());
-    }
-
-    @Override
-    public void beforeEach(ExtensionContext context) throws Exception {
-        flyway.clean();
-        flyway.migrate();
     }
 }

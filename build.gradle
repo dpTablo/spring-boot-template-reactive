@@ -105,6 +105,8 @@ dependencies {
     testImplementation "org.testcontainers:postgresql:$testcontainersVersion"
     testImplementation "org.testcontainers:mongodb:$testcontainersVersion"
     testImplementation "org.testcontainers:r2dbc:$testcontainersVersion"
+    testImplementation "org.testcontainers:selenium:$testcontainersVersion"
+
 
     /* testing - mocking api server */
     testImplementation "com.squareup.okhttp3:okhttp:4.10.0"
@@ -113,6 +115,9 @@ dependencies {
     /* testing - spring kafka */
     testImplementation 'org.springframework.kafka:spring-kafka-test'
     testImplementation "org.testcontainers:kafka:$testcontainersVersion"
+
+    /* testing - selenium */
+    testImplementation "org.seleniumhq.selenium:selenium-java:4.8.0"
 
     /* Spring RestDocs */
     asciidoctorExtensions "org.springframework.restdocs:spring-restdocs-asciidoctor:$restdocsVersion"
