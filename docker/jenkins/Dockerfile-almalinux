@@ -1,0 +1,16 @@
+FROM jenkins/jenkins:2.375.3-almalinux
+LABEL maintainer="leeyw2355@gmail.com"
+
+USER root
+
+RUN dnf --refresh update -y
+RUN dnf upgrade
+
+RUN dnf install yum-utils -y
+
+RUN yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+RUN dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+
+RUN yum install java-17-openjdk java-17-openjdk-devel -y
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/jvm/jre-17-openjdk/bin
+ENV JAVA_HOME=/usr/lib/jvm/jre-17-openjdk

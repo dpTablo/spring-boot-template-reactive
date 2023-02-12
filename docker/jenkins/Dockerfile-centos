@@ -1,0 +1,18 @@
+FROM jenkins/jenkins:2.375.3-lts-centos7
+LABEL maintainer="leeyw2355@gmail.com"
+
+USER root
+
+RUN yum update -y
+RUN yum install yum-utils wget -y
+
+RUN yum-config-manager \
+        --add-repo \
+        https://download.docker.com/linux/centos/docker-ce.repo
+RUN yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+RUN cd /home & wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
+RUN rpm -ivh jdk-17_linux-x64_bin.rpm
+
+ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/java/jdk-17/bin
+ENV JAVA_HOME /usr/java/jdk-17

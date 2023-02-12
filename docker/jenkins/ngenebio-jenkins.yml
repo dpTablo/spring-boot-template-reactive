@@ -1,0 +1,16 @@
+version: "3.1"
+
+services:
+  ngenebio-jenkins:
+    image: dptablo/jenkins
+    container_name: dptablo-jenkins
+    ports:
+      - "50000:50000"
+      - "58080:8080"
+    volumes:
+      - //var/run/docker.sock:/var/run/docker.sock
+    environment:
+      TZ: Asia/Seoul
+    privileged: true
+    user: root
+

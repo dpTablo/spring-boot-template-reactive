@@ -1,0 +1,37 @@
+pipeline {
+	agent any
+	environment {
+		TARGET_HOST = "root@배포서버 -p 배포서버포트번호" // ssh 접속명령 정보
+		DOCKER_IMAGE_NAME = "spring-boot-template-reactive"
+		DOCKER_VERSION = "0.0.1.0"
+		DCOKER_CONTAINER_NAME = 'dptablo-spring-boot'
+	}
+
+	stages {
+	    stage('git clone') {
+			steps {
+				git branch: 'dev', credentialsId: 'jenkins credentialsId', url: '저장소 clone url'
+			}
+		}
+		stage('gradle build') {
+			steps {
+				sh './gradlew build'
+			}
+		}
+		stage('build docker image') {
+			steps {
+				sh './docker/spring-boot/docker-build-dev.sh'
+			}
+		}
+		stage('deploy docker container') {
+		    steps {
+		        sshagent (credentials: ['jenkins에 등록한 ssh접속정보 credentials']) {
+		            sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker rm -f ${DCOKER_CONTAINER_NAME}'"
+		            sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker rmi -f ${DOCKER_IMAGE_NAME}:lastest'"
+		            // TODO: docker pull
+		            // TODO: docker run
+		        }
+		    }
+		}
+	}
+}
