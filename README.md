@@ -7,6 +7,7 @@ JPA에 대한 설정도 포함되어 있습니다.
 - [profile 구분](#profile-구분)
 - [API 문서 작성](#api-문서-작성)
 - [테스트 코드 작성에 대하여](#테스트-코드-작성에-대하여)
+- [docker 배포 관련 사항](#docker-배포-관련-사항)
 ---
 
 작성기준일 : 2022년 12월 21일
@@ -197,7 +198,6 @@ Spring REST Docs 로 작성할 수 없다면 아래 방법을 선택하십시오
 [https://github.com/ePages-de/restdocs-api-spec](https://github.com/ePages-de/restdocs-api-spec)
 
 > 아직 Spring Boot 3.x 에서 사용할 수 없으며, 추후 업데이트에 따라 적용될 예정입니다.
->
 
 # 테스트 코드 작성에 대하여
 
@@ -221,3 +221,14 @@ Testcontainers 를 이용한 테스트 케이스 작성을 강제하지 않습�
 - [R2DBC PostgreSQL Repository 테스트 작성 가이드](https://github.com/dpTablo/spring-boot-template-reactive/wiki/R2DBC---PostgreSQL-Repository-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1-%EA%B0%80%EC%9D%B4%EB%93%9C)
 - [Reactive MongoDB Repository 테스트 작성 가이드](https://github.com/dpTablo/spring-boot-template-reactive/wiki/Reactive-MongoDB-Repository-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1-%EA%B0%80%EC%9D%B4%EB%93%9C)
 - [Selenium 테스트 작성 가이드](https://github.com/dpTablo/spring-boot-template-reactive/wiki/Selenium-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1-%EA%B0%80%EC%9D%B4%EB%93%9C)
+
+# docker 배포 관련 사항
+
+프로젝트의 docker 디렉토리 하위에 프로젝트의 테스트와 실행을 위한 dockerfile, docker-compose 파일 예제가 작성되어 있습니다. 각 상황에 맞게 변경하여 사용하시기 바랍니다.
+주요 내용은 아래와 같습니다.
+- jenkins : jenkins 공식 docker 이미지에 openjdk-17, docker 설치가 적용된 dockerfile
+- local_mariadb : 로컬 테스트 환경을 위한 mariadb docker-compose
+- local_mongodb : 로컬 테스트 환경을 위한 mongodb docker-compose
+- local_postgres : 로컬 테스트 환경을 위한 postgres docker-compose
+- spring-boot : 프로젝트의 spring boot 배포용 dockerfile과 docker-compose 작성, 프로젝트 빌드 후 docker 이미지 생성 shellscript, jenkins pipeline 예제
+- swagger : 작성된 OAS 내용을 swagger 서버로 실행하기 위한 docker-compose  
