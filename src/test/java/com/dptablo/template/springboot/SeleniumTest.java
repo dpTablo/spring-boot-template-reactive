@@ -2,6 +2,7 @@ package com.dptablo.template.springboot;
 
 import com.dptablo.template.springboot.test.support.SeleniumTestSupportExtension;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -24,6 +25,7 @@ public class SeleniumTest {
      * @throws MalformedURLException
      */
     @Test
+    @EnabledIfSystemProperty(named = "os.arch", matches = ".*amd64.*") // 시스템 프로퍼티인 os.arch가 amd64를 포함할 때만 실행
     void test() throws MalformedURLException {
         var chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");

@@ -4,13 +4,18 @@ pipeline {
 		TARGET_HOST = "root@배포서버 -p 배포서버포트번호" // ssh 접속명령 정보
 		DOCKER_IMAGE_NAME = "spring-boot-template-reactive"
 		DOCKER_VERSION = "0.0.1.0"
-		DCOKER_CONTAINER_NAME = 'dptablo-spring-boot'
+		DOCKER_CONTAINER_NAME = 'spring-boot-template-reactive'
+        DOCKER_IMAGE_FILE_NAME = 'spring-boot-template-reactive.tar'
+        DEV_SERVER_SSH_CREDENTIALS = '배포서버의 ssh 인증정보에 해당하는 jenkins credentials id'
+        UPLOAD_PATH = '배포서버에 docker 이미지 파일을 업로드할 경로'
+        JENKINS_SSH_PK = 'jenkins 서버의 ssh 인증키 경로'
+        DOCKER_HOST_NON_SECURE_PORT = 'docker container의 host os의 포트포워딩을 위한 포트번호
 	}
 
 	stages {
 	    stage('git clone') {
 			steps {
-				git branch: 'dev', credentialsId: 'jenkins credentialsId', url: '저장소 clone url'
+				git branch: 'deploy', credentialsId: 'jenkins credentialsId', url: '저장소 clone url'
 			}
 		}
 		stage('gradle build') {
@@ -18,20 +23,44 @@ pipeline {
 				sh './gradlew build'
 			}
 		}
-		stage('build docker image') {
-			steps {
-				sh './docker/spring-boot/docker-build-dev.sh'
-			}
-		}
-		stage('deploy docker container') {
+		stage('jenkins - remove docker container & image') {
+            steps {
+                sh "docker rm -f ${DOCKER_CONTAINER_NAME}"
+                sh "docker rmi -f ${DOCKER_IMAGE_NAME}:latest"
+            }
+        }
+        stage('jenkins - docker build & save') {
+            steps {
+                sh "docker build -f docker/spring-boot/Dockerfile-dev -t ${DOCKER_IMAGE_NAME}:latest ."
+                sh "docker save -o build/${DOCKER_IMAGE_FILE_NAME} ${DOCKER_IMAGE_NAME}"
+            }
+        }
+        stage('upload docker image file') {
+            steps {
+                sshagent (credentials: [DEV_SERVER_SSH_CREDENTIALS]) {
+                    sh "scp -i ${JENKINS_SSH_PK} build/${DOCKER_IMAGE_FILE_NAME} ${TARGET_HOST}:${UPLOAD_PATH}"
+                }
+            }
+        }
+        stage('deploy docker container') {
 		    steps {
 		        sshagent (credentials: ['jenkins에 등록한 ssh접속정보 credentials']) {
-		            sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker rm -f ${DCOKER_CONTAINER_NAME}'"
+		            sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker rm -f ${DOCKER_CONTAINER_NAME}'"
 		            sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker rmi -f ${DOCKER_IMAGE_NAME}:lastest'"
 		            // TODO: docker pull
 		            // TODO: docker run
 		        }
 		    }
 		}
+		stage('target server - remove docker container & image') {
+            steps {
+                sshagent (credentials: [DEV_SERVER_SSH_CREDENTIALS]) {
+                    sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker rm -f ${DOCKER_CONTAINER_NAME}'"
+                    sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker rmi -f ${DOCKER_IMAGE_NAME}'"
+                    sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker load < ${UPLOAD_PATH}/${DOCKER_IMAGE_FILE_NAME}'"
+                    sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker run -d -p 18200:9090 --name ${DOCKER_CONTAINER_NAME} -it ${DOCKER_IMAGE_NAME} -e DOCKER_HOST_NON_SECURE_PORT=${DOCKER_HOST_NON_SECURE_PORT}'"
+                }
+            }
+        }
 	}
 }
