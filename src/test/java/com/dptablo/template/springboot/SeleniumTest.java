@@ -17,6 +17,12 @@ import static org.assertj.core.api.Assertions.*;
 @Testcontainers
 @ExtendWith(SeleniumTestSupportExtension.class)
 public class SeleniumTest {
+    /**
+     * selenium/standalone-chrome를 이용하여 remote selenium를 사용한 테스트 예제 입니다.
+     * 이 테스트 케이스는 OS/ARCH가 linux/amd64인 경우에만 통과합니다.
+     *
+     * @throws MalformedURLException
+     */
     @Test
     void test() throws MalformedURLException {
         var chromeOptions = new ChromeOptions();
