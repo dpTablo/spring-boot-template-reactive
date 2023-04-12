@@ -4,6 +4,9 @@ import com.dptablo.template.springboot.model.dto.UserDto;
 import com.dptablo.template.springboot.model.entity.User;
 import com.dptablo.template.springboot.security.jwt.JwtRequestFilter;
 import com.dptablo.template.springboot.service.UserService;
+import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper;
+import com.epages.restdocs.apispec.ResourceSnippetParameters;
+import com.epages.restdocs.apispec.Schema;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +21,6 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -30,15 +32,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 @WebMvcTest(
@@ -72,51 +74,51 @@ class UserApiControllerTest {
 
     @DisplayName("전체 유저 리스트 조회 api 테스트")
     @Test
-    void getAllUserList() {
-        try {
-            //given
-            UserDto.SimpleUser user1 = new UserDto.SimpleUser(User.builder()
-                    .userId("user1")
-                    .phoneNumber("01011112222")
-                    .build());
+    void getAllUserListTest() throws Exception {
+        //given
+        UserDto.SimpleUser user1 = new UserDto.SimpleUser(User.builder()
+                .userId("user1")
+                .phoneNumber("01011112222")
+                .build());
 
-            UserDto.SimpleUser user2 = new UserDto.SimpleUser(User.builder()
-                    .userId("user2")
-                    .phoneNumber("01033334444")
-                    .build());
+        UserDto.SimpleUser user2 = new UserDto.SimpleUser(User.builder()
+                .userId("user2")
+                .phoneNumber("01033334444")
+                .build());
 
-            given(userService.getAllUserList()).willReturn(Arrays.asList(user1, user2));
+        given(userService.getAllUserList()).willReturn(Arrays.asList(user1, user2));
 
-            //when
-            var userFieldDescriptors = new FieldDescriptor[] {
-                    fieldWithPath("userId").description("사용자 id"),
-                    fieldWithPath("phoneNumber").description("휴대폰번호")
-            };
-
-            MvcResult mvcResult = mockMvc.perform(get("/api/user/list/all")
-                            .accept(MediaType.APPLICATION_JSON)
-                    )
-                    .andExpect(status().isOk())
-                    .andDo(document("user-{methodName}",
-                            preprocessRequest(prettyPrint()),
-                            preprocessResponse(prettyPrint()),
-                            responseFields(
-                                    fieldWithPath("[]").description("유저 리스트")).andWithPrefix("[].", userFieldDescriptors)
+        //when
+        MvcResult mvcResult = mockMvc.perform(
+                get("/api/user/list/all")
+                        .accept(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isOk())
+                .andDo(MockMvcRestDocumentationWrapper.document("user-{methodName}",
+                            resource(ResourceSnippetParameters.builder()
+                                    .summary("전체 사용자 목록을 조회합니다.")
+                                    .responseSchema(Schema.schema("user-list-response"))
+                                    .responseHeaders(
+                                            headerWithName("Content-Type").description("응답 컨텐츠 타입")
+                                    )
+                                    .responseFields(
+                                            fieldWithPath("[]").description("유저 리스트"),
+                                            fieldWithPath("[].userId").description("사용자 id"),
+                                            fieldWithPath("[].phoneNumber").description("휴대폰번호")
+                                    )
+                                    .build()
                             )
-                    )
-                    .andReturn();
+                ))
+                .andReturn();
 
-            //then
-            ObjectMapper objectMapper = new ObjectMapper();
+        //then
+        ObjectMapper objectMapper = new ObjectMapper();
 
-            List<Map> list = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), List.class);
-            assertThat(list.size()).isEqualTo(2);
-            assertThat(list.get(0).get("userId")).isEqualTo(user1.getUserId());
-            assertThat(list.get(0).get("phoneNumber")).isEqualTo(user1.getPhoneNumber());
-            assertThat(list.get(1).get("userId")).isEqualTo(user2.getUserId());
-            assertThat(list.get(1).get("phoneNumber")).isEqualTo(user2.getPhoneNumber());
-        } catch(Exception e) {
-            fail(e.getMessage());
-        }
+        List<Map> list = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), List.class);
+        assertThat(list.size()).isEqualTo(2);
+        assertThat(list.get(0).get("userId")).isEqualTo(user1.getUserId());
+        assertThat(list.get(0).get("phoneNumber")).isEqualTo(user1.getPhoneNumber());
+        assertThat(list.get(1).get("userId")).isEqualTo(user2.getUserId());
+        assertThat(list.get(1).get("phoneNumber")).isEqualTo(user2.getPhoneNumber());
     }
 }
