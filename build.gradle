@@ -1,10 +1,10 @@
 buildscript {
     ext {
         queryDslVersion = "5.0.0"
-        testcontainersVersion = "1.17.6"
+        testcontainersVersion = "1.18.0"
         snippetsDir = file('build/generated-snippets')
         restdocsVersion = '3.0.0'
-        epagesRestdocsVersion = '0.17.1'
+        epagesRestdocsVersion = '0.18.0'
         springdocOpenApiVersion = '2.0.2'
     }
 }
@@ -15,7 +15,7 @@ plugins {
     id "io.spring.dependency-management" version "1.1.0"
     id "idea"
     id "org.asciidoctor.jvm.convert" version "3.3.2"
-    id 'com.epages.restdocs-api-spec' version "0.17.1"
+    id 'com.epages.restdocs-api-spec' version "0.18.0"
 }
 
 repositories {
@@ -104,6 +104,7 @@ dependencies {
     testImplementation "org.testcontainers:mongodb:$testcontainersVersion"
     testImplementation "org.testcontainers:r2dbc:$testcontainersVersion"
     testImplementation "org.testcontainers:selenium:$testcontainersVersion"
+    testImplementation "org.testcontainers:kafka:$testcontainersVersion"
 
 
     /* testing - mocking api server */

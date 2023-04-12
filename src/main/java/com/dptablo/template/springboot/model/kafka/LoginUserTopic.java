@@ -5,12 +5,13 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@AllArgsConstructor
+@Data
 @Builder
-public class LoginUserMessage {
+@AllArgsConstructor
+@NoArgsConstructor
+public class LoginUserTopic {
+    public static final String TOPIC_NAME = "login-user-topic";
+
     private String userId;
     private String name;
     private LocalDateTime loginTime;

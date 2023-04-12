@@ -5,30 +5,6 @@ spring:
     devtools:
         livereload:
             enabled: true
-#    r2dbc:
-#        url: r2dbc:tc:postgresql:///test_database?TC_IMAGE_TAG=14.5
-#        username: sa
-#        password: sa
-#    datasource-postgres:
-#        driver-class-name: org.postgresql.Driver
-#        url: jdbc:postgresql://localhost:5432/test_database
-#        username: root
-#        password: root1234
-#    jpa:
-#        hibernate:
-#            ddl-auto: none
-#            naming:
-#                implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
-#                physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
-#        properties:
-#            hibernate:
-#                show_sql: true
-#                format_sql: true
-#                use_sql_comments: true
-#                hbm2ddl:
-#                    auto: validate
-#                dialect: org.hibernate.dialect.PostgreSQLDialect
-#        database: postgresql
     flyway:
         enabled: true
         validate-on-migrate: true
@@ -39,16 +15,6 @@ spring:
         baseline-version: 0
         sql-migration-suffixes: ddl
         clean-disabled: false
-    kafka:
-        producer:
-            bootstrap-servers: localhost:9092
-        consumer:
-            bootstrap-servers: localhost:9092
-            auto-offset-reset: earliest
-            group-id: tablo-kafka-group
-            enable-auto-commit: false
-        listener:
-            ack-mode: manual
 server:
     port: 9090
 logging:
