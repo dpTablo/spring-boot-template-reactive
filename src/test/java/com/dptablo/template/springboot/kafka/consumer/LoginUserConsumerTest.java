@@ -2,9 +2,7 @@ package com.dptablo.template.springboot.kafka.consumer;
 
 import com.dptablo.template.springboot.configuration.KafkaConfiguration;
 import com.dptablo.template.springboot.configuration.kafka.consumer.LoginUserConsumerConfiguration;
-import com.dptablo.template.springboot.configuration.kafka.producer.LoginUserProducerConfiguration;
 import com.dptablo.template.springboot.configuration.kafka.topic.LoginUserTopicConfiguration;
-import com.dptablo.template.springboot.kafka.producer.LoginUserProducer;
 import com.dptablo.template.springboot.model.kafka.LoginUserTopic;
 import com.dptablo.template.springboot.test.support.TestContainersKafkaTest;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -16,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
-import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.serializer.JsonSerializer;
@@ -38,9 +35,7 @@ import static org.assertj.core.api.Assertions.assertThat;
         KafkaConfiguration.class,
         LoginUserConsumerConfiguration.class,
         LoginUserTopicConfiguration.class,
-        LoginUserConsumer.class,
-        LoginUserProducerConfiguration.class,
-        LoginUserProducer.class
+        LoginUserConsumer.class
 })
 @EnableAutoConfiguration
 class LoginUserConsumerTest {
@@ -50,9 +45,6 @@ class LoginUserConsumerTest {
 
     @Autowired
     private KafkaProperties kafkaProperties;
-
-    @Autowired
-    private LoginUserProducer loginUserProducer;
 
     private KafkaTemplate<String, LoginUserTopic> kafkaTemplate;
 
@@ -78,15 +70,12 @@ class LoginUserConsumerTest {
                 .name("사용자1")
                 .loginTime(LocalDateTime.now())
                 .build());
-
         var sendResult = completableFuture.get();
 
         var messageConsumed = consumer.getLatch().await(5, TimeUnit.SECONDS);
 
         // then
-//        var sendResult = completableFuture.get();
         assertThat(sendResult).isNotNull();
-
         assertThat(messageConsumed).isTrue();
         assertThat(consumer.getPayload());
     }

@@ -45,9 +45,9 @@ class LoginUserProducerTest {
 
         // when
         var completableFuture = producer.sendMessage(loginUserTopic);
+        var sendResult = completableFuture.get();
 
         // then
-        var sendResult = completableFuture.get();
         assertThat(sendResult).isNotNull();
 
         var producerRecord = sendResult.getProducerRecord();
