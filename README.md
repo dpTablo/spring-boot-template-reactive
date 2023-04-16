@@ -17,7 +17,7 @@ JPA에 대한 설정도 포함되어 있습니다.
 ## 주요 기술스택
 
 - java 17
-- Spring boot 3.0.0 (release 2022.11.24)
+- Spring boot 3.0.5
 - gradle 7.5.1 (release 2022.08.05)
 - QueryDSL 5.0.0
 - flyway 9.8.2
@@ -25,9 +25,10 @@ JPA에 대한 설정도 포함되어 있습니다.
 - PostgreSQL Driver 42.5.1
 - PostgreSQL R2DBC Driver 1.0.0.RELEASE
 - Mongo DB 6.0.3
-- restdocs 3.0.0
+- Spring Kafka
+- restdocs 3.0.0 (with restdocs-api-spec)
 - junit jupiter 5.9.1, assertj 3.23.1
-- testcontainers 1.17.6
+- testcontainers 1.18.0
 
 ## spring boot 3.0.0 주요 내용
 
@@ -177,11 +178,11 @@ Intellij 에서 Spring Boot, JUnit 테스트 등 run 을 실행할 경우 오류
 - [Open API 3](https://www.openapis.org/) Spec으로 작성합니다.
 - Open API 3 Spec의 파일 포맷은 YAML로 작성합니다.
 - [Spring REST Docs](https://docs.spring.io/spring-restdocs/docs/current/reference/htmlsingle/#documenting-your-api) 로 테스트 기반의 API 문서 작성하며, 작성된 문서에서 OAS 3 Spec을 생성합니다.
+- epages-restdocs-api-spec 을 적용하여 작성된 restdocs 를 기반으로 OAS 3 Spec을 생성합니다.
 
 프로젝트 개발 여건에 따라 문서를 작성하는 방식은 선택할 수 있습니다. 가장 권장되는 방법은 Spring REST Docs를 사용하는 것입니다.
 
 Spring REST Docs 로 작성할 수 없다면 아래 방법을 선택하십시오.
-
 - OAS3 Spec의 java 어노테이션을 이용한 작성 방법 (swagger v3 oas)
 - OAS3 Spec 규격의 YAML 문서를 작성 (어노테이션을 사용하지 않는 방법)
 
@@ -221,6 +222,7 @@ Testcontainers 를 이용한 테스트 케이스 작성을 강제하지 않습�
 - [R2DBC PostgreSQL Repository 테스트 작성 가이드](https://github.com/dpTablo/spring-boot-template-reactive/wiki/R2DBC---PostgreSQL-Repository-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1-%EA%B0%80%EC%9D%B4%EB%93%9C)
 - [Reactive MongoDB Repository 테스트 작성 가이드](https://github.com/dpTablo/spring-boot-template-reactive/wiki/Reactive-MongoDB-Repository-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1-%EA%B0%80%EC%9D%B4%EB%93%9C)
 - [Selenium 테스트 작성 가이드](https://github.com/dpTablo/spring-boot-template-reactive/wiki/Selenium-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1-%EA%B0%80%EC%9D%B4%EB%93%9C)
+- [Kafka Producer/Consumer 테스트 작성 가이드](https://github.com/dpTablo/spring-boot-template-reactive/wiki/Kafka-Producer-Consumer-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1-%EA%B0%80%EC%9D%B4%EB%93%9C)
 
 # docker 배포 관련 사항
 
