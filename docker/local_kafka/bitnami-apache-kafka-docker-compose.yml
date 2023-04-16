@@ -1,0 +1,49 @@
+version: "2"
+
+services:
+    zookeeper:
+        container_name: zookeeper
+        image: bitnami/zookeeper:3.8.1
+        networks:
+            - kafka-network
+        ports:
+            - "2181:2181"
+        environment:
+            - ALLOW_ANONYMOUS_LOGIN=yes
+    kafka0:
+        container_name: kafka0
+        image: bitnami/kafka:3.4.0
+        ports:
+            - "9092:9092"
+        networks:
+            - kafka-network
+        environment:
+            - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+            - ALLOW_PLAINTEXT_LISTENER=yes
+            - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+            - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
+            - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://localhost:9092,EXTERNAL://localhost:9093
+            - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
+        depends_on:
+            - zookeeper
+    kafka-ui:
+        container_name: kafka-ui
+        image: provectuslabs/kafka-ui:latest
+        ports:
+            - 9090:8080
+        networks:
+            - kafka-network
+        depends_on:
+            - zookeeper
+            - kafka0
+        environment:
+            DYNAMIC_CONFIG_ENABLED: 'false'  # not necessary, added for tests
+            KAFKA_CLUSTERS_0_NAME: kafka0
+            KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka0:9092
+#            KAFKA_CLUSTERS_0_METRICS_PORT: 9997
+#            KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://schema-registry0:8085
+#            KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME: first
+#            KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS: http://kafka-connect0:8083
+networks:
+    kafka-network:
+        driver: bridge
