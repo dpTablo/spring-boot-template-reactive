@@ -22,19 +22,12 @@ public class LoginUserConsumer {
 
     @KafkaListener(
             topics = "login-user-topic",
-//            groupId = "kafka-test-group",
+            groupId = "kafka-test-group",
             containerFactory = "loginUserListenerContainerFactory")
     public void receive(ConsumerRecord<String, LoginUserTopic> consumerRecord) {
-        System.out.println("================= LoginUserConsumer " + consumerRecord.value().toString());
         payload = consumerRecord;
         latch.countDown();
     }
-
-//    @KafkaListener(topics = LoginUserTopic.TOPIC_NAME, groupId = "kafka-test-group")
-//    public void receive(LoginUserTopic consumerRecord) {
-//        System.out.println("Received payload: " + consumerRecord.getUserId());
-//        latch.countDown();
-//    }
 
     public void resetLatch() {
         latch = new CountDownLatch(1);

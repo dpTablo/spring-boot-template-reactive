@@ -67,7 +67,7 @@ dependencies {
     /* data - r2dbc */
     implementation "org.springframework.data:spring-data-r2dbc"
     implementation 'io.r2dbc:r2dbc-pool:1.0.0.RELEASE'
-    implementation 'org.postgresql:r2dbc-postgresql:1.0.0.RELEASE'
+    implementation 'org.postgresql:r2dbc-postgresql:1.0.1.RELEASE'
 
     /* jwt */
     implementation 'com.auth0:java-jwt:4.2.1'
@@ -86,19 +86,18 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.junit.platform:junit-platform-launcher'
-    testImplementation 'io.projectreactor:reactor-test:3.5.1'
+    testImplementation 'io.projectreactor:reactor-test:3.5.5'
 
     testCompileOnly "org.projectlombok:lombok"
     testAnnotationProcessor "org.projectlombok:lombok"
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.9.1"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.9.1"
-    testImplementation "org.assertj:assertj-core:3.23.1"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.9.2"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.9.2"
+    testImplementation "org.assertj:assertj-core:3.24.2"
 
     testImplementation "org.testcontainers:junit-jupiter:$testcontainersVersion"
 
     /* testing - database */
-    testImplementation "com.h2database:h2:2.1.214"
     testImplementation "org.testcontainers:testcontainers:$testcontainersVersion"
     testImplementation "org.testcontainers:postgresql:$testcontainersVersion"
     testImplementation "org.testcontainers:mongodb:$testcontainersVersion"

@@ -63,13 +63,14 @@ class LoginUserConsumerTest {
     @Test
     void test() throws ExecutionException, InterruptedException {
         // given
-
-        // when
-        var completableFuture = kafkaTemplate.send(LoginUserTopic.TOPIC_NAME, LoginUserTopic.builder()
+        var loginUserTopic = LoginUserTopic.builder()
                 .userId("user1")
                 .name("사용자1")
                 .loginTime(LocalDateTime.now())
-                .build());
+                .build();
+
+        // when
+        var completableFuture = kafkaTemplate.send(LoginUserTopic.TOPIC_NAME, loginUserTopic);
         var sendResult = completableFuture.get();
 
         var messageConsumed = consumer.getLatch().await(5, TimeUnit.SECONDS);
