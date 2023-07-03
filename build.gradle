@@ -4,14 +4,14 @@ buildscript {
         testcontainersVersion = "1.18.0"
         snippetsDir = file('build/generated-snippets')
         restdocsVersion = '3.0.0'
-        epagesRestdocsVersion = '0.18.0'
+        epagesRestdocsVersion = '0.18.2'
         springdocOpenApiVersion = '2.0.2'
     }
 }
 
 plugins {
     id "java"
-    id "org.springframework.boot" version "3.0.5"
+    id "org.springframework.boot" version "3.1.1"
     id "io.spring.dependency-management" version "1.1.0"
     id "idea"
     id "org.asciidoctor.jvm.convert" version "3.3.2"
@@ -23,7 +23,7 @@ repositories {
 }
 
 group = "com.dptablo"
-version = "1.2.0"
+version = "1.5.0"
 
 sourceCompatibility = 17
 targetCompatibility = 17
@@ -47,9 +47,9 @@ dependencies {
     implementation 'org.springframework.kafka:spring-kafka'
 
     /* database */
-    implementation 'org.flywaydb:flyway-core:9.8.2'
-    implementation "org.mariadb.jdbc:mariadb-java-client:3.1.0"
-    implementation "org.postgresql:postgresql:42.5.1"
+    implementation 'org.flywaydb:flyway-core:9.20.0'
+    implementation "org.mariadb.jdbc:mariadb-java-client:3.1.4"
+    implementation "org.postgresql:postgresql:42.6.0"
 
     /* data - jpa */
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
@@ -70,7 +70,7 @@ dependencies {
     implementation 'org.postgresql:r2dbc-postgresql:1.0.1.RELEASE'
 
     /* jwt */
-    implementation 'com.auth0:java-jwt:4.2.1'
+    implementation 'com.auth0:java-jwt:4.4.0'
 
     /* utils */
     implementation 'org.apache.commons:commons-lang3'
@@ -86,7 +86,7 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.junit.platform:junit-platform-launcher'
-    testImplementation 'io.projectreactor:reactor-test:3.5.5'
+    testImplementation 'io.projectreactor:reactor-test:3.5.7'
 
     testCompileOnly "org.projectlombok:lombok"
     testAnnotationProcessor "org.projectlombok:lombok"
